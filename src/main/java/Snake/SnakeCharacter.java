@@ -31,7 +31,7 @@ public class SnakeCharacter {
         cabeza = -1;
         cola = -1;
         largo = 1;
-        velocidad = 1;
+        velocidad = 4;
         X = (panel.getWidth()/2);
         Y = (panel.getHeight()/2);
         diametro = 13;

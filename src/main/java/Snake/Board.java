@@ -133,20 +133,20 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         this.tiempoFinal = System.currentTimeMillis();
         this.tiempo = tiempoFinal - tiempoIncio;
         if(Charki.getLargo() == SnakeCharacter.Limite && finalizar) {
-            img1 = "wp.png";
-            img2 = "gg.gif";
+            img1 = "Recursos/wp.png";
+            img2 = "/Recursos/gg.gif";
         } else {
-            img1 = "f.png";
-            img2 = "ez.gif";
+            img1 = "Recursos/f.png";
+            img2 = "/Recursos/ez.gif";
         }
         removeKeyListener(this);
         jLabel4.setIcon(Redimensionar(new ImageIcon(img1),jLabel4));
         ImageIcon gif = Redimensionar(new ImageIcon(img2), jLabel6);
         jLabel6.setIcon(gif);
         gif.setImageObserver(jLabel6);
-        jButton5.setVisible(!enJuego);
-        jLabel4.setVisible(!enJuego);
-        jLabel6.setVisible(!enJuego);
+        jButton5.setVisible(enJuego);
+        jLabel4.setVisible(enJuego);
+        jLabel6.setVisible(enJuego);
         jPanel3.repaint();
         guardarDatos();
         DetenerJuego();
@@ -384,15 +384,15 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
            Actualizar();
            Renderizar();
            DibujarJuego();
-           t2= System.nanoTime() ; // Calculate the time after the ejecution
-           dt=(t2-t1)/1000000L;  // calculate the real time in the ejecution
-           sleepTime = period - dt;// Calculate the time left in the ejecution
-           if(sleepTime<=0)        // Avoid the negative value in the sleepTime
+           t2= System.nanoTime() ; // Tiempo del sistema después de que se ejecuta el bucle del juego, en nanosegundos
+           dt=(t2-t1)/1000000L;  // El tiempo real empleado en este bucle, convertido a milisegundos
+           sleepTime = period - dt;// Calcula el tiempo restante de este ciclo, en milisegundos
+           if(sleepTime<=0)        // Evita que el valor sleepTime sea negativo
                  sleepTime=2;
            try {     
-           Thread.sleep(sleepTime); // Lets the thread sleeps
+           Thread.sleep(sleepTime); // Deja que el hilo duerma, determinado por el valor sleepTime
           } catch (InterruptedException ex) { }
-             t1 = System.nanoTime();
+             t1 = System.nanoTime();  // Obtener la hora actual del sistema nuevamente
         }
         jButton1.setVisible(true);
         
