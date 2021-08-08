@@ -5,6 +5,7 @@
  */
 package Snake;
 
+import General.Resize;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,6 +17,8 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import General.Resize;
+import java.time.Instant;
 /**
  *
  * @author Cris
@@ -31,6 +34,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     private Comida bolita; 
     private SnakeCharacter Charki; 
     private String Jugador;
+    private Resize Ajustar = new Resize();
     private long tiempoIncio, tiempoFinal, tiempo;
 
  
@@ -133,15 +137,16 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         this.tiempoFinal = System.currentTimeMillis();
         this.tiempo = tiempoFinal - tiempoIncio;
         if(Charki.getLargo() == SnakeCharacter.Limite && finalizar) {
-            img1 = "Recursos/wp.png";
-            img2 = "/Recursos/gg.gif";
+            img1 = "wp.png";
+            img2 = "gg.gif";
         } else {
-            img1 = "Recursos/f.png";
-            img2 = "/Recursos/ez.gif";
+            img1 = "f.png";
+            img2 = "ez.gif";
         }
+       
         removeKeyListener(this);
-        jLabel4.setIcon(Redimensionar(new ImageIcon(img1),jLabel4));
-        ImageIcon gif = Redimensionar(new ImageIcon(img2), jLabel6);
+        jLabel4.setIcon(Ajustar.Resize(new ImageIcon("Recursos/"+img1),jLabel4));
+        ImageIcon gif = Ajustar.Resize(new ImageIcon("Recursos/"+img2), jLabel6);
         jLabel6.setIcon(gif);
         gif.setImageObserver(jLabel6);
         jButton5.setVisible(enJuego);
@@ -153,14 +158,8 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     }
     
     
-    /*Changes the size of the images and return a new one*/
-    public ImageIcon Redimensionar(ImageIcon img, JLabel dimensions) {
-        
-        Image Oimg = img.getImage().getScaledInstance(dimensions.getWidth(), dimensions.getHeight(), Image.SCALE_REPLICATE);
-        ImageIcon newIMG = new ImageIcon(Oimg);
-        
-        return newIMG;
-    }
+    
+    
     
     
     /*Saves the player score*/
@@ -169,7 +168,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
             File archivo = new File("Puntuajes.txt");
             FileWriter escribir = new FileWriter(archivo, true);
             
-            escribir.write(Jugador +","+ Long.toString(tiempo) + "/n");
+            escribir.write(Jugador+ "," + bolita.getPuntos() +","+ Long.toString(tiempo) +","+ Date.from(Instant.now()).toString() + "\n");
             
             escribir.close();
         } catch (Exception e) {
@@ -231,12 +230,8 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         jButton1.setVisible(false);
         jPanel3.add(jButton5);
         jButton5.setBounds(130, 290, 120, 50);
-
-        jLabel4.setText("jLabel4");
         jPanel3.add(jLabel4);
         jLabel4.setBounds(10, 40, 160, 180);
-
-        jLabel6.setText("jLabel6");
         jPanel3.add(jLabel6);
         jLabel6.setBounds(190, 10, 200, 250);
 

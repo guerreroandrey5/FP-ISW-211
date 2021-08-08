@@ -48,7 +48,7 @@ public class Comida {
            (Math.abs((charki.getPosY() + charki.getDiametro() / 2) - (location.y + size.y / 2)) < charki.getDiametro())) {   
             location = setPosition();
             charki.AumentarVelocidad();
-            puntos += 1; 
+            puntos += 5; 
                 if (charki.getLargo() == SnakeCharacter.Limite) {
                     return false;
                 } else if (charki.getLargo() < SnakeCharacter.Limite) {
