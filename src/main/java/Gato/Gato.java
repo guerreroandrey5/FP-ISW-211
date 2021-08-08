@@ -6,8 +6,11 @@
 package Gato;
 
 //import java.util.Date;
+import java.io.File;
+import java.io.FileWriter;
+import java.time.Instant;
+import java.util.Date;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author guerreroandrey5
@@ -17,15 +20,26 @@ public class Gato extends javax.swing.JFrame {
     String equis = "X";
     private int Contador;
     private int ContadorB;
+    private Date fecha = new Date();
+    private long tiempoIncio, tiempoFinal, tiempo;
+    String nJ1 = "";
+    String nJ2 = "";
+    
     //private Date fecha = new Date();
     /**
      * Creates new form Gato
      */
     public Gato() {
         initComponents();
+        
+        nJ1 = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
+        LblP1.setText(nJ1 + ":");
+        
+        nJ2 = JOptionPane.showInputDialog("Nombre del Jugador 2: ");
+        LblP2.setText(nJ2 + ":");
         //Lblf.setText(fecha.toLocaleString()); 
     }
-
+    //<editor-fold defaultstate="collapsed" desc="Condiciones para ganar">
     public void ganar() {
         String B1 = Btn1.getText();
         String B2 = Btn2.getText();
@@ -36,7 +50,9 @@ public class Gato extends javax.swing.JFrame {
         String B7 = Btn7.getText();
         String B8 = Btn8.getText();
         String B9 = Btn9.getText();
-        //Condicioneas para el primer jugador
+        
+        //Condiciones para el primer jugador
+        
         if (B1.equals("X") && B2.equals("X") && B3.equals("X")){
             ganaJ1();
         }
@@ -61,6 +77,7 @@ public class Gato extends javax.swing.JFrame {
         if (B1.equals("X") && B5.equals("X") && B9.equals("X")){
             ganaJ1();
         }
+        
         //Condicioneas para el segundo jugador
         
         if (B1.equals("O") && B2.equals("O") && B3.equals("O")){
@@ -88,7 +105,17 @@ public class Gato extends javax.swing.JFrame {
             ganaJ2();
         }
     }
-
+    //</editor-fold>
+    public void guardarDatos() {
+        try {
+            File archivo = new File("PuntajesGato.txt");
+            FileWriter writez = new FileWriter(archivo, true);
+            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" +", "+ Date.from(Instant.now()).toString() + "\n");           
+            writez.close();
+        } catch (Exception e) {
+        }
+    }
+    
     public void empatar() {
         String B1 = Btn1.getText();
         String B2 = Btn2.getText();
@@ -107,21 +134,27 @@ public class Gato extends javax.swing.JFrame {
             nGame();
         }
     }
-
+    //<editor-fold defaultstate="collapsed" desc="Funciones de ganar y reiniciar el juego">
     public void ganaJ1() {
-        JOptionPane.showMessageDialog(null, "Ha ganado el Jugador 1");
+        JOptionPane.showMessageDialog(null, "Ha ganado " + nJ1);
         nGame();
         Contador +=1;
         String ContStr = String.valueOf(Contador);
         LblPts1.setText(ContStr);
+        this.tiempoFinal = System.currentTimeMillis();
+        this.tiempo = tiempoFinal - tiempoIncio;
+        guardarDatos();
     }
 
     public void ganaJ2() {
-        JOptionPane.showMessageDialog(null, "Ha ganado el Jugador 2");
+        JOptionPane.showMessageDialog(null, "Ha ganado " + nJ2);
         nGame();
         ContadorB +=1;
         String ContStr = String.valueOf(ContadorB);
         LblPts2.setText(ContStr);
+        this.tiempoFinal = System.currentTimeMillis();
+        this.tiempo = tiempoFinal - tiempoIncio;
+        guardarDatos();
     }
 
     public void nGame() {       
@@ -146,7 +179,7 @@ public class Gato extends javax.swing.JFrame {
         Btn9.setText("");
         equis = "X";
     }
-
+//</editor-fold>
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,7 +189,7 @@ public class Gato extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        PanelGato = new javax.swing.JPanel();
         Btn1 = new javax.swing.JButton();
         Btn2 = new javax.swing.JButton();
         Btn3 = new javax.swing.JButton();
@@ -179,7 +212,8 @@ public class Gato extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 3));
+        PanelGato.setName("PanelGato"); // NOI18N
+        PanelGato.setLayout(new java.awt.GridLayout(3, 3));
 
         Btn1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn1.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +221,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn1);
+        PanelGato.add(Btn1);
 
         Btn2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn2.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +229,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn2ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn2);
+        PanelGato.add(Btn2);
 
         Btn3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn3.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +237,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn3ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn3);
+        PanelGato.add(Btn3);
 
         Btn4.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn4.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +245,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn4ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn4);
+        PanelGato.add(Btn4);
 
         Btn5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn5.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +253,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn5ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn5);
+        PanelGato.add(Btn5);
 
         Btn6.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn6.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +261,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn6ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn6);
+        PanelGato.add(Btn6);
 
         Btn7.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn7.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +269,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn7ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn7);
+        PanelGato.add(Btn7);
 
         Btn8.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn8.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +277,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn8ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn8);
+        PanelGato.add(Btn8);
 
         Btn9.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn9.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +285,7 @@ public class Gato extends javax.swing.JFrame {
                 Btn9ActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn9);
+        PanelGato.add(Btn9);
 
         BtnNew.setText("Nuevo Juego");
         BtnNew.addActionListener(new java.awt.event.ActionListener() {
@@ -285,24 +319,24 @@ public class Gato extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LblFHoy)
                                 .addGap(18, 18, 18)
-                                .addComponent(Lblf))
+                                .addComponent(Lblf)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LblHora)
                                 .addGap(18, 18, 18)
-                                .addComponent(Lblh)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Lblh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BtnNew)
-                                .addGap(42, 42, 42)
-                                .addComponent(LblP2))
+                                .addGap(28, 28, 28)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LblP2)
                             .addComponent(LblP1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,27 +353,33 @@ public class Gato extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblP1)
                             .addComponent(LblPts1))
-                        .addGap(27, 27, 27)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblP2)
-                            .addComponent(LblPts2)
-                            .addComponent(BtnNew)))
+                            .addComponent(LblPts2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblFHoy)
                             .addComponent(Lblf))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LblHora)
-                            .addComponent(Lblh))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(LblHora)
+                                    .addComponent(Lblh)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnNew)
+                                .addGap(26, 26, 26)))))
+                .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    //<editor-fold defaultstate="collapsed" desc="Botones">
     private void Btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2ActionPerformed
         Btn2.setText(equis);
         if (equis.equals("X")) {
@@ -463,7 +503,7 @@ public class Gato extends javax.swing.JFrame {
         Contador = 0;
         ContadorB = 0;
     }//GEN-LAST:event_BtnNewActionPerformed
-
+    //</editor-fold>
     /**
      * @param args the command line arguments
      */
@@ -498,7 +538,7 @@ public class Gato extends javax.swing.JFrame {
             }
         });
     }
-
+    //<editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn1;
     private javax.swing.JButton Btn2;
@@ -518,6 +558,7 @@ public class Gato extends javax.swing.JFrame {
     private javax.swing.JLabel LblPts2;
     private javax.swing.JLabel Lblf;
     private javax.swing.JLabel Lblh;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel PanelGato;
     // End of variables declaration//GEN-END:variables
+//</editor-fold>
 }
