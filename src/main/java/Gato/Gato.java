@@ -5,8 +5,7 @@
  */
 package Gato;
 
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,14 +15,15 @@ import javax.swing.JOptionPane;
 public class Gato extends javax.swing.JFrame {
 
     String equis = "X";
-    int Contador;
-    int ContadorB;
-
+    private int Contador;
+    private int ContadorB;
+    //private Date fecha = new Date();
     /**
      * Creates new form Gato
      */
     public Gato() {
         initComponents();
+        //Lblf.setText(fecha.toLocaleString()); 
     }
 
     public void ganar() {
@@ -292,13 +292,12 @@ public class Gato extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LblFHoy)
                                 .addGap(18, 18, 18)
-                                .addComponent(Lblf)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(Lblf))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LblHora)
                                 .addGap(18, 18, 18)
-                                .addComponent(Lblh)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(Lblh)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BtnNew)
