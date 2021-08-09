@@ -22,70 +22,86 @@ public class Puntuajes extends javax.swing.JFrame {
      */
     public Puntuajes() {
         initComponents();
+         setLocationRelativeTo(null);
+         setSize(830,420);
     }
 
     public void setData() {
+        ArrayList<String> lineas = new ArrayList<>();
         try {
         File archivo = new File("Puntuajes.txt");
         String linea;
         Scanner lector = new Scanner(archivo);
-        ArrayList<String[]> lineas = new ArrayList<>();
+        
             System.out.println(lineas.size());
         while ((linea = lector.nextLine())!= null) {
+            lineas.add(linea);
             String[] data = linea.split(",");
-            lineas.add(data);
-            System.out.println(lineas.size());
+            System.out.println(lineas);
             data[2] = convertTime(data[2]);
             DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
             modelo.addRow(data);
             //jTable1.setModel(modelo);
         }
-        ArrayList<String[]> mejores = new ArrayList<>();
-        boolean ciclo = true;
-        while (ciclo) {
-            for (int i = 0; i < lineas.size(); i++) {
-                boolean best = mejoresTiempos(lineas.get(i), lineas, i);
-                if (best) {
-                    mejores.add(lineas.get(i));
-                    lineas.remove(i);
-                    System.out.println(lineas.size());
-                    if(lineas.size() == 0) {
-                        
-                        ciclo = false;
-                    }
-                }
-            }
-        }
-            for (int i = 0; i < mejores.size(); i++) {
-                String[] row = mejores.get(i);
-                DefaultTableModel modelo2 = (DefaultTableModel)jTable2.getModel();
-                modelo2.addRow(row);
-                //jTable2.setModel(modelo2);
-            }
+       
    
         } catch (Exception e) {
          
         }
-        
-
+       ArrayList<String[]> mejores = new ArrayList<>();
+        boolean ciclo = true;
+        String[] bestOne;
+        while (ciclo) {
+            int i = 0;
+            for (i = 0; i < lineas.size(); i++) {
+                i = 0;
+                String[] data = lineas.get(i).split(",");
+                if (lineas.size() == 1) {
+                    mejores.add(data);
+                    lineas.remove(i);
+                } else {
+                    String[] data2 = lineas.get((i+1)).split(",");
+                    bestOne = mejoresTiempos(data,data2);
+                    if (bestOne == data) {
+                        mejores.add(data);
+                        lineas.remove(i);
+                        System.out.println(lineas.size() + "1634564654k");
+                    } else {
+                        mejores.add(data2);
+                        lineas.remove((i+1));
+                        System.out.println(lineas.size() + "1634564654j");
+                    }
+                }
+                
+            }
+            if(lineas.size() == 0) {
+                        
+                        ciclo = false;
+                    }
+        }
+            for (int k = 0; k < mejores.size(); k++) {
+                String[] row = mejores.get(k);
+                DefaultTableModel modelo2 = (DefaultTableModel)jTable2.getModel();
+                modelo2.addRow(row);
+                //jTable2.setModel(modelo2);
+            }  
     }
     
-    public boolean mejoresTiempos(String[] data, ArrayList<String[]> arrayL, int i) {
-        ArrayList<String[]> NewList = arrayL;
-        NewList.remove(i);
-        int DataP = Integer.parseInt(data[1]);
-        int DataT = Integer.parseInt(data[2]);
-        for (int j = 0; j < NewList.size(); j++) {
-            String[] get = NewList.get(j);
-            int Puntos = Integer.parseInt(get[1]);
-            int Tiempo = Integer.parseInt(get[2]);
-            if(DataP > Puntos && DataT < Tiempo) {
-                return true;
-            }
-            
+    public String[] mejoresTiempos(String[] first, String[] second) {
+
+        int DataP = Integer.parseInt(first[1]);
+        System.out.println(first[1]);
+        System.out.println(first[2]);
+        int DataT = Integer.parseInt(first[2]);
+        int Puntos = Integer.parseInt(second[1]);
+        int Tiempo = Integer.parseInt(second[2]);
+        if(DataP > Puntos) {
+                return first;
+        } else if ((DataP == Puntos && DataT < Tiempo)) {
+            return first;
+        } else {
+            return second;
         }
-        
-        return false;
     }
     
     public String convertTime(String fecha) {
@@ -165,11 +181,11 @@ public class Puntuajes extends javax.swing.JFrame {
         jBest.setLayout(jBestLayout);
         jBestLayout.setHorizontalGroup(
             jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jBestLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                .addGroup(jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jBestLayout.setVerticalGroup(
