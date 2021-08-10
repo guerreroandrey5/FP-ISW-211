@@ -6,7 +6,7 @@
 package Gato;
 
 import javax.swing.JOptionPane;
-
+import General.PrinMenu;
 /**
  *
  * @author guerreroandrey5
@@ -105,7 +105,9 @@ public class MenuGato extends javax.swing.JFrame {
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea salir de Tic Tac Toe?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0){
-            System.exit(0);
+           setVisible(false);
+           PrinMenu PrincMenu = new PrinMenu();
+           PrincMenu.setVisible(true);
         }
     }//GEN-LAST:event_BtnSalirActionPerformed
 
