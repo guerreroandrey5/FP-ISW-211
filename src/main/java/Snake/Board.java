@@ -143,10 +143,11 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
             img1 = "f.png";
             img2 = "ez.gif";
         }
-       
         removeKeyListener(this);
-        jLabel4.setIcon(Ajustar.Resize(new ImageIcon("Recursos/"+img1),jLabel4));
-        ImageIcon gif = Ajustar.Resize(new ImageIcon("Recursos/"+img2), jLabel6);
+        System.out.println(".\\//Recursos/"+img1);
+        //jLabel4.setIcon(Ajustar.Resize(new ImageIcon(ruta+"//Recursos/"+img1),jLabel4));
+        jLabel4.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img1),jLabel4));
+        ImageIcon gif = Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img2), jLabel6);
         jLabel6.setIcon(gif);
         gif.setImageObserver(jLabel6);
         jButton5.setVisible(enJuego);

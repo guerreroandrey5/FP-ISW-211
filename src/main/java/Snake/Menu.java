@@ -48,7 +48,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setSize(524,123);
 
-        jLabel1.setIcon(Ajustar.Resize(new ImageIcon("Recursos/menu.jpg"),jLabel1));
+        jLabel1.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/menu.jpg"),jLabel1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,7 +73,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Salir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +134,10 @@ public class Menu extends javax.swing.JFrame {
         score.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
