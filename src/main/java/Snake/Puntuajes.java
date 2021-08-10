@@ -27,7 +27,7 @@ public class Puntuajes extends javax.swing.JFrame {
     }
 
     public void setData() {
-        ArrayList<String> lineas = new ArrayList<>();
+        ArrayList<String[]> lineas = new ArrayList<>();
         try {
         File archivo = new File("Puntuajes.txt");
         String linea;
@@ -35,72 +35,71 @@ public class Puntuajes extends javax.swing.JFrame {
         
             System.out.println(lineas.size());
         while ((linea = lector.nextLine())!= null) {
-            lineas.add(linea);
-            String[] data = linea.split(",");
-            System.out.println(lineas);
-            data[2] = convertTime(data[2]);
-            DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-            modelo.addRow(data);
-            //jTable1.setModel(modelo);
+            lineas.add(linea.split(","));
         }
        
-   
         } catch (Exception e) {
-         
+            System.out.println(e);
         }
-       ArrayList<String[]> mejores = new ArrayList<>();
-        boolean ciclo = true;
-        String[] bestOne;
-        while (ciclo) {
-            int i = 0;
-            for (i = 0; i < lineas.size(); i++) {
-                i = 0;
-                String[] data = lineas.get(i).split(",");
-                if (lineas.size() == 1) {
-                    mejores.add(data);
-                    lineas.remove(i);
-                } else {
-                    String[] data2 = lineas.get((i+1)).split(",");
-                    bestOne = mejoresTiempos(data,data2);
-                    if (bestOne == data) {
-                        mejores.add(data);
-                        lineas.remove(i);
-                        System.out.println(lineas.size() + "1634564654k");
-                    } else {
-                        mejores.add(data2);
-                        lineas.remove((i+1));
-                        System.out.println(lineas.size() + "1634564654j");
-                    }
+        ArrayList<String[]> Mejores = new ArrayList<>();
+        ArrayList<String[]> lineasCopia = new ArrayList<String[]>(lineas);
+            while (true) {
+            for (int i = 0; i < lineasCopia.size(); i++) {
+                String[] lineaDato = lineasCopia.get(i);
+                boolean mejor = mejoresTiempos(lineaDato, lineasCopia, i);
+                if (mejor) {
+                    Mejores.add(lineaDato);
+                    lineasCopia.remove(i);
                 }
-                
             }
-            if(lineas.size() == 0) {
-                        
-                        ciclo = false;
-                    }
-        }
-            for (int k = 0; k < mejores.size(); k++) {
-                String[] row = mejores.get(k);
-                DefaultTableModel modelo2 = (DefaultTableModel)jTable2.getModel();
-                modelo2.addRow(row);
-                //jTable2.setModel(modelo2);
-            }  
+            if (lineasCopia.size() == 0) {
+                break;
+            }
+            }
+            LlenarTablas(Mejores, lineas);
     }
     
-    public String[] mejoresTiempos(String[] first, String[] second) {
-
-        int DataP = Integer.parseInt(first[1]);
-        System.out.println(first[1]);
-        System.out.println(first[2]);
-        int DataT = Integer.parseInt(first[2]);
-        int Puntos = Integer.parseInt(second[1]);
-        int Tiempo = Integer.parseInt(second[2]);
-        if(DataP > Puntos) {
-                return first;
-        } else if ((DataP == Puntos && DataT < Tiempo)) {
-            return first;
+    public void LlenarTablas(ArrayList<String[]> tabla1, ArrayList<String[]> tabla2) {
+               for (int i = 0; i < tabla1.size(); i++) {
+                String[] data = tabla1.get(i);
+                data[2] = convertTime(data[2]);
+            DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel();
+            modelo.addRow(data); 
+            //jTable2.setModel(modelo);
+            }
+            for (int i = 0; i < tabla2.size(); i++) {
+                String[] data = tabla2.get(i);
+                //data[2] = convertTime(data[2]);
+            DefaultTableModel modelo2 = (DefaultTableModel)jTable1.getModel();
+            modelo2.addRow(data); 
+            //jTable1.setModel(modelo2);
+            }
+    }
+    
+    public boolean mejoresTiempos(String[] dato1, ArrayList<String[]> Lista, int indice) {
+        int cond = 0;
+        int DatoP = Integer.parseInt(dato1[1]);
+        int DatoT = Integer.parseInt(dato1[2]);
+        for (int i = 0; i < Lista.size(); i++) {
+            System.out.println("iooipio2525");
+            String[] puntuaje = Lista.get(i);
+            int Puntos = Integer.parseInt(puntuaje[1]);
+            int Tiempo = Integer.parseInt(puntuaje[2]);
+            if (indice != i && Lista.size() != 1) {
+                if (DatoP > Puntos) {
+                     System.out.println("Hey");
+                } else if (DatoP == Puntos && DatoT <= Tiempo) {
+                    System.out.println("Hola");
+                } else {
+                    cond += 1;
+                }
+            }
+        }
+        
+        if (cond != 0) {
+            return false;
         } else {
-            return second;
+            return true;
         }
     }
     
