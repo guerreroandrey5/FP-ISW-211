@@ -110,9 +110,9 @@ public class Gato extends javax.swing.JFrame {
     public void guardarDatosJ1() {
         try {
             File archivo = new File("PuntajesGato.txt");
-            FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ1+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
-            writez.close();
+            FileWriter write = new FileWriter(archivo, true);
+            write.write(nJ1+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            write.close();
         } catch (Exception e) {
         }
     }
@@ -120,8 +120,18 @@ public class Gato extends javax.swing.JFrame {
     public void guardarDatosJ2() {
         try {
             File archivo = new File("PuntajesGato.txt");
+            FileWriter write = new FileWriter(archivo, true);
+            write.write(nJ2+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            write.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void guardarDatos() {
+        try {
+            File archivo = new File("HistorialGato.txt");
             FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ2+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" +", "+ Date.from(Instant.now()).toString() + "\n");           
             writez.close();
         } catch (Exception e) {
         }
@@ -154,6 +164,7 @@ public class Gato extends javax.swing.JFrame {
         LblPts1.setText(ContStr);
         this.tiempoFinal = System.currentTimeMillis();
         this.tiempo = tiempoFinal - tiempoIncio;
+        
     }
 
     public void ganaJ2() {
@@ -187,12 +198,13 @@ public class Gato extends javax.swing.JFrame {
         Btn9.setEnabled(true);
         Btn9.setText("");
         equis = "X";
+        guardarDatos();
         if (Contador > ContadorB){
             guardarDatosJ1();
         }
         if(ContadorB > Contador){
             guardarDatosJ2();
-        }
+        }     
     }
 //</editor-fold>
     /**

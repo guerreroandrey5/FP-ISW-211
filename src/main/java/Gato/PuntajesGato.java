@@ -6,7 +6,6 @@
 package Gato;
 
 import java.io.*;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +20,12 @@ public class PuntajesGato extends javax.swing.JFrame {
      */
     private String ruta = System.getProperties().getProperty("user.dir");
     public PuntajesGato() {
-        initComponents();
+        initComponents();     
+        TRecordsLoad();
+        THistoryLoad();
+        
+    }
+    void THistoryLoad(){
         File archivo = null;
         FileReader FileR = null;
         BufferedReader BufferedR = null;
@@ -30,21 +34,41 @@ public class PuntajesGato extends javax.swing.JFrame {
             FileR = new FileReader(archivo);
             BufferedR = new BufferedReader(FileR);
             String data;
-            DefaultListModel list = new DefaultListModel();
-            DefaultTableModel tabla = new DefaultTableModel();
-            tabla.addColumn("Puntajes de Gato");
-            list.addElement("Mostrar Datos del TXT");
+            DefaultTableModel RecordsTablez = new DefaultTableModel();
+            RecordsTablez.addColumn("Records de Gato");
             while((data = BufferedR.readLine()) != null){
                 System.out.println(data);
-                list.addElement(list);
-                tabla.addRow(new String []{data});
+                RecordsTablez.addRow(new String []{data});
             }   
-            PointsTable.setModel(tabla);
-        }catch (Exception e){}finally{try{if(null!=FileR) {FileR.close();}}catch(IOException e2){
+            RecordsTable.setModel(RecordsTablez);
+        }catch (Exception e){JOptionPane.showMessageDialog(null, "No hay datos registrados sobre Records, el registro se mostrará en blanco");}finally{try{if(null!=FileR) {FileR.close();}}catch(IOException e2){
             
         }
     }
     }
+    
+    void TRecordsLoad(){
+        File archivo = null;
+        FileReader FileR = null;
+        BufferedReader BufferedR = null;
+        try{
+            archivo = new File(ruta + "//HistorialGato.txt");
+            FileR = new FileReader(archivo);
+            BufferedR = new BufferedReader(FileR);
+            String data;
+            DefaultTableModel HistoryTablez = new DefaultTableModel();
+            HistoryTablez.addColumn("Historial de Partidas de Gato");
+            while((data = BufferedR.readLine()) != null){
+                System.out.println(data);
+                HistoryTablez.addRow(new String []{data});
+            }   
+            HistoryTable.setModel(HistoryTablez);
+        }catch (Exception e){JOptionPane.showMessageDialog(null, "No hay datos registrados sobre Historial, el registro se mostrará en blanco");}finally{try{if(null!=FileR) {FileR.close();}}catch(IOException e2){
+            
+        }
+    }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,54 +79,98 @@ public class PuntajesGato extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        PointsTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        RecordsTable = new javax.swing.JTable();
+        BtnMenu = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        HistoryTable = new javax.swing.JTable();
+        LblRc = new javax.swing.JLabel();
+        LblHP = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Puntajes de Gato");
         setName("PGato"); // NOI18N
         setResizable(false);
 
-        jScrollPane1.setViewportView(PointsTable);
+        RecordsTable.setEnabled(false);
+        jScrollPane1.setViewportView(RecordsTable);
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnMenu.setText("Volver");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnMenuActionPerformed(evt);
             }
         });
+
+        HistoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        HistoryTable.setEnabled(false);
+        jScrollPane2.setViewportView(HistoryTable);
+
+        LblRc.setText("Records");
+
+        LblHP.setText("Historial de Partidas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LblRc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(BtnMenu)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LblHP)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnMenu)
+                            .addComponent(LblRc)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LblHP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea regresar al menú?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        if (respuesta == 0){
            setVisible(false);
            MenuGato TicTacMenu = new MenuGato();
            TicTacMenu.setVisible(true);
        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,7 +198,7 @@ public class PuntajesGato extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PuntajesGato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+            
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -140,8 +208,12 @@ public class PuntajesGato extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable PointsTable;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BtnMenu;
+    private javax.swing.JTable HistoryTable;
+    private javax.swing.JLabel LblHP;
+    private javax.swing.JLabel LblRc;
+    private javax.swing.JTable RecordsTable;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
