@@ -32,7 +32,7 @@ public class MenuGato extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         BtnJugar = new javax.swing.JButton();
         BtnPoints = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,8 +45,18 @@ public class MenuGato extends javax.swing.JFrame {
         });
 
         BtnPoints.setText("Puntajes");
+        BtnPoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPointsActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("no hace nada xd");
+        BtnSalir.setText("Salir");
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("TicTacToe The Game :D");
 
@@ -54,14 +64,14 @@ public class MenuGato extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(144, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(BtnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(145, Short.MAX_VALUE))
+                    .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(134, 134, 134))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +83,7 @@ public class MenuGato extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnPoints)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(BtnSalir)
                 .addContainerGap(109, Short.MAX_VALUE))
         );
 
@@ -98,6 +108,19 @@ public class MenuGato extends javax.swing.JFrame {
         setVisible(false);
         TicTacGame.setVisible(true);
     }//GEN-LAST:event_BtnJugarActionPerformed
+
+    private void BtnPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPointsActionPerformed
+        PuntajesGato TicTacScores = new PuntajesGato();
+        setVisible(false);
+        TicTacScores.setVisible(true);
+    }//GEN-LAST:event_BtnPointsActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea salir de Tic Tac Toe?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0){
+           System.exit(0);
+       }
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,7 +160,7 @@ public class MenuGato extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnJugar;
     private javax.swing.JButton BtnPoints;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton BtnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

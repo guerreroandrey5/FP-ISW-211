@@ -38,15 +38,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="144" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnJugar" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="BtnPoints" min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="BtnSalir" min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="145" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -60,7 +60,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="BtnPoints" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnSalir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="109" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -79,11 +79,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Puntajes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPointsActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="BtnSalir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="no hace nada xd"/>
+            <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSalirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

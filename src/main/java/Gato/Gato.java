@@ -17,13 +17,14 @@ import javax.swing.JOptionPane;
  */
 public class Gato extends javax.swing.JFrame {
 
-    String equis = "X";
+    private String equis = "X";
     private int Contador;
     private int ContadorB;
     private Date fecha = new Date();
     private long tiempoIncio, tiempoFinal, tiempo;
-    String nJ1 = "";
-    String nJ2 = "";
+    private String nJ1 = "";
+    private String nJ2 = "";
+    private int ContSave;
     
     //private Date fecha = new Date();
     /**
@@ -37,7 +38,7 @@ public class Gato extends javax.swing.JFrame {
         
         nJ2 = JOptionPane.showInputDialog("Nombre del Jugador 2: ");
         LblP2.setText(nJ2 + ":");
-        //Lblf.setText(fecha.toLocaleString()); 
+        
     }
     //<editor-fold defaultstate="collapsed" desc="Condiciones para ganar">
     public void ganar() {
@@ -106,11 +107,21 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-    public void guardarDatos() {
+    public void guardarDatosJ1() {
         try {
             File archivo = new File("PuntajesGato.txt");
             FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" +", "+ Date.from(Instant.now()).toString() + "\n");           
+            writez.write(nJ1+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            writez.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void guardarDatosJ2() {
+        try {
+            File archivo = new File("PuntajesGato.txt");
+            FileWriter writez = new FileWriter(archivo, true);
+            writez.write(nJ2+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
             writez.close();
         } catch (Exception e) {
         }
@@ -143,7 +154,6 @@ public class Gato extends javax.swing.JFrame {
         LblPts1.setText(ContStr);
         this.tiempoFinal = System.currentTimeMillis();
         this.tiempo = tiempoFinal - tiempoIncio;
-        guardarDatos();
     }
 
     public void ganaJ2() {
@@ -153,8 +163,7 @@ public class Gato extends javax.swing.JFrame {
         String ContStr = String.valueOf(ContadorB);
         LblPts2.setText(ContStr);
         this.tiempoFinal = System.currentTimeMillis();
-        this.tiempo = tiempoFinal - tiempoIncio;
-        guardarDatos();
+        this.tiempo = tiempoFinal - tiempoIncio;       
     }
 
     public void nGame() {       
@@ -178,6 +187,12 @@ public class Gato extends javax.swing.JFrame {
         Btn9.setEnabled(true);
         Btn9.setText("");
         equis = "X";
+        if (Contador > ContadorB){
+            guardarDatosJ1();
+        }
+        if(ContadorB > Contador){
+            guardarDatosJ2();
+        }
     }
 //</editor-fold>
     /**
@@ -208,6 +223,7 @@ public class Gato extends javax.swing.JFrame {
         LblP2 = new javax.swing.JLabel();
         LblPts1 = new javax.swing.JLabel();
         LblPts2 = new javax.swing.JLabel();
+        BtnMen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -310,6 +326,13 @@ public class Gato extends javax.swing.JFrame {
 
         LblPts2.setText("0");
 
+        BtnMen.setText("Volver al menú");
+        BtnMen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -343,6 +366,10 @@ public class Gato extends javax.swing.JFrame {
                             .addComponent(LblPts1)
                             .addComponent(LblPts2))
                         .addGap(53, 53, 53))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnMen)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,7 +400,9 @@ public class Gato extends javax.swing.JFrame {
                                 .addComponent(BtnNew)
                                 .addGap(26, 26, 26)))))
                 .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnMen)
+                .addGap(11, 11, 11))
         );
 
         pack();
@@ -503,6 +532,16 @@ public class Gato extends javax.swing.JFrame {
         Contador = 0;
         ContadorB = 0;
     }//GEN-LAST:event_BtnNewActionPerformed
+
+    private void BtnMenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenActionPerformed
+     
+       int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea regresar al menú?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       if (respuesta == 0){
+           setVisible(false);
+           MenuGato TicTacMenu = new MenuGato();
+           TicTacMenu.setVisible(true);
+       }
+    }//GEN-LAST:event_BtnMenActionPerformed
     //</editor-fold>
     /**
      * @param args the command line arguments
@@ -549,6 +588,7 @@ public class Gato extends javax.swing.JFrame {
     private javax.swing.JButton Btn7;
     private javax.swing.JButton Btn8;
     private javax.swing.JButton Btn9;
+    private javax.swing.JButton BtnMen;
     private javax.swing.JButton BtnNew;
     private javax.swing.JLabel LblFHoy;
     private javax.swing.JLabel LblHora;
