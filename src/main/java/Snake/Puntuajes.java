@@ -81,15 +81,12 @@ public class Puntuajes extends javax.swing.JFrame {
         int DatoP = Integer.parseInt(dato1[1]);
         int DatoT = Integer.parseInt(dato1[2]);
         for (int i = 0; i < Lista.size(); i++) {
-            System.out.println("iooipio2525");
             String[] puntuaje = Lista.get(i);
             int Puntos = Integer.parseInt(puntuaje[1]);
             int Tiempo = Integer.parseInt(puntuaje[2]);
             if (indice != i && Lista.size() != 1) {
                 if (DatoP > Puntos) {
-                     System.out.println("Hey");
                 } else if (DatoP == Puntos && DatoT <= Tiempo) {
-                    System.out.println("Hola");
                 } else {
                     cond += 1;
                 }
