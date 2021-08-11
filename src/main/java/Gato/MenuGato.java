@@ -4,22 +4,32 @@
  * and open the template in the editor.
  */
 package Gato;
-
+import General.*;
 import javax.swing.JOptionPane;
 import General.PrinMenu;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 /**
  *
  * @author guerreroandrey5
  */
 public class MenuGato extends javax.swing.JFrame {
-
+    private Resize Ajustar = new Resize();
     /**
      * Creates new form MenuGato
      */
     public MenuGato() {
         initComponents();
+        Imgs();
     }
-
+    
+private void Imgs(){
+        LblImg.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/TitleScrn.png"),LblImg));
+        
+        ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
+        this.setIconImage(icono.getImage());
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,8 +44,10 @@ public class MenuGato extends javax.swing.JFrame {
         BtnJugar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        LblImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TicTacToe Game");
         setResizable(false);
 
         BtnSalir.setText("Salir");
@@ -76,24 +88,33 @@ public class MenuGato extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(124, 124, 124))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(LblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
+                .addGap(15, 15, 15)
+                .addComponent(LblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(BtnJugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnPoints)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
@@ -163,6 +184,7 @@ public class MenuGato extends javax.swing.JFrame {
     private javax.swing.JButton BtnJugar;
     private javax.swing.JButton BtnPoints;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JLabel LblImg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

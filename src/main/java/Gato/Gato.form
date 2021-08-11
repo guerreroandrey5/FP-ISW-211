@@ -28,37 +28,28 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
                       <Component id="PanelGato" min="-2" pref="302" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LblFHoy" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Lblf" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="147" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LblHora" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Lblh" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BtnNew" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="LblP2" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="LblP1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LblFHoy" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnNew" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Lblf" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LblP2" pref="66" max="32767" attributes="0"/>
+                          <Component id="LblP1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="LblPts1" min="-2" max="-2" attributes="0"/>
                           <Component id="LblPts2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -75,38 +66,25 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="BtnNew" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="LblFHoy" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="3" attributes="0">
+                      <Component id="Lblf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LblP1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LblPts1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LblP2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LblPts2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="LblFHoy" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Lblf" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="LblHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Lblh" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BtnNew" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                   </Group>
               </Group>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="PanelGato" min="-2" pref="328" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="BtnMen" min="-2" max="-2" attributes="0"/>
@@ -226,25 +204,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnNewActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="LblHora">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hora:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Lblh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="h"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="LblFHoy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha de Juego:"/>
+        <Property name="text" type="java.lang.String" value="Fecha y hora de Juego:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Lblf">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="fhoy"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LblP1">
       <Properties>

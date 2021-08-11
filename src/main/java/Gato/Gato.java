@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.Instant;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 /**
  *
@@ -26,19 +27,32 @@ public class Gato extends javax.swing.JFrame {
     private String nJ2 = "";
     private int ContSave;
     
-    //private Date fecha = new Date();
     /**
      * Creates new form Gato
      */
     public Gato() {
         initComponents();
-        
         nJ1 = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
+        while (nJ1.equals("")){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
+            nJ1 = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
+        }
+
         LblP1.setText(nJ1 + ":");
         
         nJ2 = JOptionPane.showInputDialog("Nombre del Jugador 2: ");
+        while (nJ2.equals("")){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
+            nJ2 = JOptionPane.showInputDialog("Nombre del Jugador 2: ");
+        }
         LblP2.setText(nJ2 + ":");
-        
+        Lblf.setText(fecha.toLocaleString());
+        Imgs();
+    }
+    
+    private void Imgs(){
+        ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
+        this.setIconImage(icono.getImage());
     }
     //<editor-fold defaultstate="collapsed" desc="Condiciones para ganar">
     public void ganar() {
@@ -107,11 +121,13 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
+       
+    //<editor-fold defaultstate="collapsed" desc="Guardar Datos">
     public void guardarDatosJ1() {
         try {
             File archivo = new File("PuntajesGato.txt");
             FileWriter write = new FileWriter(archivo, true);
-            write.write(nJ1+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            write.write(nJ1 + ", tiene el record de " + LblPts1.getText() + " Puntos, " + fecha.toLocaleString() + "\n");           
             write.close();
         } catch (Exception e) {
         }
@@ -121,7 +137,7 @@ public class Gato extends javax.swing.JFrame {
         try {
             File archivo = new File("PuntajesGato.txt");
             FileWriter write = new FileWriter(archivo, true);
-            write.write(nJ2+ ", tiene el record de " + LblPts1.getText() + " Puntos, " + Date.from(Instant.now()).toString() + "\n");           
+            write.write(nJ2 + ", tiene el record de " + LblPts2.getText() + " Puntos, " + fecha.toLocaleString() + "\n");           
             write.close();
         } catch (Exception e) {
         }
@@ -131,11 +147,13 @@ public class Gato extends javax.swing.JFrame {
         try {
             File archivo = new File("HistorialGato.txt");
             FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" +", "+ Date.from(Instant.now()).toString() + "\n");           
+            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" + ", " + fecha.toLocaleString() + "\n");           
             writez.close();
         } catch (Exception e) {
         }
     }
+    //</editor-fold>
+    
     
     public void empatar() {
         String B1 = Btn1.getText();
@@ -153,24 +171,25 @@ public class Gato extends javax.swing.JFrame {
            B7 != "" && B8 != "" && B9 != ""){
             JOptionPane.showMessageDialog(null, "El juego está empatado");
             nGame();
+            guardarDatos();
         }
     }
     //<editor-fold defaultstate="collapsed" desc="Funciones de ganar y reiniciar el juego">
     public void ganaJ1() {
         JOptionPane.showMessageDialog(null, "Ha ganado " + nJ1);
         nGame();
-        Contador +=1;
+        Contador = Contador * 2;
         String ContStr = String.valueOf(Contador);
         LblPts1.setText(ContStr);
         this.tiempoFinal = System.currentTimeMillis();
-        this.tiempo = tiempoFinal - tiempoIncio;
+        this.tiempo = tiempoFinal - tiempoIncio;       
         
     }
 
     public void ganaJ2() {
         JOptionPane.showMessageDialog(null, "Ha ganado " + nJ2);
         nGame();
-        ContadorB +=1;
+        ContadorB = ContadorB * 2;
         String ContStr = String.valueOf(ContadorB);
         LblPts2.setText(ContStr);
         this.tiempoFinal = System.currentTimeMillis();
@@ -197,14 +216,8 @@ public class Gato extends javax.swing.JFrame {
         Btn8.setText("");
         Btn9.setEnabled(true);
         Btn9.setText("");
-        equis = "X";
+        equis = "X";              
         guardarDatos();
-        if (Contador > ContadorB){
-            guardarDatosJ1();
-        }
-        if(ContadorB > Contador){
-            guardarDatosJ2();
-        }     
     }
 //</editor-fold>
     /**
@@ -227,8 +240,6 @@ public class Gato extends javax.swing.JFrame {
         Btn8 = new javax.swing.JButton();
         Btn9 = new javax.swing.JButton();
         BtnNew = new javax.swing.JButton();
-        LblHora = new javax.swing.JLabel();
-        Lblh = new javax.swing.JLabel();
         LblFHoy = new javax.swing.JLabel();
         Lblf = new javax.swing.JLabel();
         LblP1 = new javax.swing.JLabel();
@@ -322,13 +333,7 @@ public class Gato extends javax.swing.JFrame {
             }
         });
 
-        LblHora.setText("Hora:");
-
-        Lblh.setText("h");
-
-        LblFHoy.setText("Fecha de Juego:");
-
-        Lblf.setText("fhoy");
+        LblFHoy.setText("Fecha y hora de Juego:");
 
         LblP1.setText("Jugador 1:");
 
@@ -353,31 +358,24 @@ public class Gato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 43, Short.MAX_VALUE)
                         .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LblFHoy)
-                                .addGap(18, 18, 18)
-                                .addComponent(Lblf)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LblHora)
-                                .addGap(18, 18, 18)
-                                .addComponent(Lblh)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnNew)
-                                .addGap(28, 28, 28)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LblP2)
-                            .addComponent(LblP1))
-                        .addGap(18, 18, 18)
+                            .addComponent(LblFHoy)
+                            .addComponent(BtnNew))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Lblf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LblP2, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                            .addComponent(LblP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblPts1)
                             .addComponent(LblPts2))
-                        .addGap(53, 53, 53))))
+                        .addGap(32, 32, 32))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnMen)
@@ -389,28 +387,20 @@ public class Gato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(BtnNew))
+                    .addComponent(LblFHoy)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Lblf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblP1)
                             .addComponent(LblPts1))
-                        .addGap(30, 30, 30)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblP2)
-                            .addComponent(LblPts2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LblFHoy)
-                            .addComponent(Lblf))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(LblHora)
-                                    .addComponent(Lblh)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnNew)
-                                .addGap(26, 26, 26)))))
+                            .addComponent(LblPts2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnMen)
@@ -424,9 +414,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2ActionPerformed
         Btn2.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn2.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn2.setEnabled(false);
         }         
@@ -437,9 +433,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn5ActionPerformed
         Btn5.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn5.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn5.setEnabled(false);
         }
@@ -450,9 +452,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1ActionPerformed
         Btn1.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn1.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn1.setEnabled(false);
         }
@@ -463,9 +471,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3ActionPerformed
         Btn3.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn3.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn3.setEnabled(false);
         }
@@ -476,9 +490,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4ActionPerformed
         Btn4.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn4.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn4.setEnabled(false);
         }
@@ -489,9 +509,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn6ActionPerformed
         Btn6.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn6.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn6.setEnabled(false);
         }
@@ -502,9 +528,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn7ActionPerformed
         Btn7.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn7.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn7.setEnabled(false);
         }
@@ -515,9 +547,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn8ActionPerformed
         Btn8.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn8.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn8.setEnabled(false);
         }
@@ -528,9 +566,15 @@ public class Gato extends javax.swing.JFrame {
     private void Btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn9ActionPerformed
         Btn9.setText(equis);
         if (equis.equals("X")) {
+            Contador +=1;
+            String ContStr = String.valueOf(Contador);
+            LblPts1.setText(ContStr);
             Btn9.setEnabled(false);
             equis = "O";
         } else {
+            ContadorB +=1;
+            String ContStr = String.valueOf(ContadorB);
+            LblPts2.setText(ContStr);
             equis = "X";
             Btn9.setEnabled(false);
         }
@@ -539,16 +583,27 @@ public class Gato extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn9ActionPerformed
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
-        LblPts1.setText("0");
-        LblPts2.setText("0");
-        Contador = 0;
-        ContadorB = 0;
+       int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea reiniciar la partida?, se reiniciará todo progreso", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       if (respuesta == 0){
+            LblPts1.setText("0");
+            LblPts2.setText("0");
+            Contador = 0;
+            ContadorB = 0;
+            nGame();
+       }      
     }//GEN-LAST:event_BtnNewActionPerformed
 
     private void BtnMenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenActionPerformed
      
        int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea regresar al menú?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        if (respuesta == 0){
+           if (Contador > ContadorB){
+            guardarDatosJ1();
+            }
+            if(ContadorB > Contador){
+            guardarDatosJ2();
+            }
+            guardarDatos();
            setVisible(false);
            MenuGato TicTacMenu = new MenuGato();
            TicTacMenu.setVisible(true);
@@ -603,13 +658,11 @@ public class Gato extends javax.swing.JFrame {
     private javax.swing.JButton BtnMen;
     private javax.swing.JButton BtnNew;
     private javax.swing.JLabel LblFHoy;
-    private javax.swing.JLabel LblHora;
     private javax.swing.JLabel LblP1;
     private javax.swing.JLabel LblP2;
     private javax.swing.JLabel LblPts1;
     private javax.swing.JLabel LblPts2;
     private javax.swing.JLabel Lblf;
-    private javax.swing.JLabel Lblh;
     private javax.swing.JPanel PanelGato;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>

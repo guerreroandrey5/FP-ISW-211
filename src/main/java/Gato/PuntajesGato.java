@@ -6,6 +6,7 @@
 package Gato;
 
 import java.io.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,8 +24,14 @@ public class PuntajesGato extends javax.swing.JFrame {
         initComponents();     
         TRecordsLoad();
         THistoryLoad();
-        
+        Imgs();
     }
+    
+    private void Imgs(){
+        ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
+        this.setIconImage(icono.getImage());
+    }
+    
     void THistoryLoad(){
         File archivo = null;
         FileReader FileR = null;
