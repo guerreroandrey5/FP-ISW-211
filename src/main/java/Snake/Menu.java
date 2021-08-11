@@ -136,7 +136,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.exit(0);        // TODO add your handling code here:
+        General.PrinMenu MenuPrincipal = new General.PrinMenu();
+        MenuPrincipal.setVisible(true);
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
