@@ -7,6 +7,7 @@ package General;
 import Gato.MenuGato;
 import javax.swing.JOptionPane;
 import Snake.Menu;
+import Ahorcado.AMenu;
 /**
  *
  * @author guerreroandrey5
@@ -107,7 +108,7 @@ public class PrinMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGatoActionPerformed
-           setVisible(false);
+           dispose();
            MenuGato TicTacMenu = new MenuGato();
            TicTacMenu.setVisible(true);
     }//GEN-LAST:event_BtnGatoActionPerformed
@@ -120,14 +121,13 @@ public class PrinMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void BtnAhorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAhorActionPerformed
-//           setVisible(false);
-//           MenuGato TicTacMenu = new MenuGato();
-//           TicTacMenu.setVisible(true);
-            JOptionPane.showMessageDialog(null, "Juego en Construcción!!");
+           dispose();
+           AMenu AhoMenu = new AMenu();
+           AhoMenu.setVisible(true);
     }//GEN-LAST:event_BtnAhorActionPerformed
 
     private void BtnSankeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSankeActionPerformed
-           setVisible(false);
+           dispose();
            Menu SankeMenu = new Menu();
            SankeMenu.setVisible(true);
     }//GEN-LAST:event_BtnSankeActionPerformed
