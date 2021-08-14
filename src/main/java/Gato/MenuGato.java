@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package Gato;
-import General.Resize;
-import javax.swing.*;
+import General.*;
+import javax.swing.JOptionPane;
 import General.PrinMenu;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 /**
  *
  * @author guerreroandrey5
@@ -123,7 +126,7 @@ private void Imgs(){
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea salir de Tic Tac Toe?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0){
-           dispose();
+           setVisible(false);
            PrinMenu PrincMenu = new PrinMenu();
            PrincMenu.setVisible(true);
         }
@@ -131,14 +134,14 @@ private void Imgs(){
 
     private void BtnPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPointsActionPerformed
         PuntajesGato TicTacScores = new PuntajesGato();
-        dispose();
+        setVisible(false);
         TicTacScores.setVisible(true);
     }//GEN-LAST:event_BtnPointsActionPerformed
 
     private void BtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJugarActionPerformed
 
         Gato TicTacGame = new Gato();
-        dispose();
+        setVisible(false);
         TicTacGame.setVisible(true);
     }//GEN-LAST:event_BtnJugarActionPerformed
 

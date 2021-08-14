@@ -6,7 +6,8 @@
 package Gato;
 
 import java.io.*;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -172,7 +173,7 @@ public class PuntajesGato extends javax.swing.JFrame {
     private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea regresar al menú?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        if (respuesta == 0){
-           dispose();
+           setVisible(false);
            MenuGato TicTacMenu = new MenuGato();
            TicTacMenu.setVisible(true);
        }
