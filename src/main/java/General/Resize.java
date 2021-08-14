@@ -2,8 +2,7 @@ package General;
 
 
 import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

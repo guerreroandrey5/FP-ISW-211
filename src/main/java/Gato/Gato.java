@@ -6,12 +6,9 @@
 package Gato;
 
 //import java.util.Date;
-import java.io.File;
-import java.io.FileWriter;
-import java.time.Instant;
+import java.io.*;
 import java.util.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 /**
  *
  * @author guerreroandrey5
@@ -25,7 +22,6 @@ public class Gato extends javax.swing.JFrame {
     private long tiempoIncio, tiempoFinal, tiempo;
     private String nJ1 = "";
     private String nJ2 = "";
-    private int ContSave;
     
     /**
      * Creates new form Gato
@@ -604,7 +600,7 @@ public class Gato extends javax.swing.JFrame {
             guardarDatosJ2();
             }
             guardarDatos();
-           setVisible(false);
+           dispose();
            MenuGato TicTacMenu = new MenuGato();
            TicTacMenu.setVisible(true);
        }
