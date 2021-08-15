@@ -29,6 +29,7 @@ public class Resize {
         return newIMG;
     }
     
+    /*Changes the size of the images and return a new one as backgroud*/
     public ImageIcon ResizeJF(ImageIcon img, JFrame dimensions) {
         
         Image Oimg = img.getImage().getScaledInstance(dimensions.getWidth(), dimensions.getHeight(), Image.SCALE_REPLICATE);

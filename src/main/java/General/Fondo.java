@@ -16,7 +16,9 @@ import javax.swing.JLabel;
  * @author Cris
  */
 public class Fondo {
-    private Resize Ajustar = new Resize(); 
+    private Resize Ajustar = new Resize();
+    
+    //Set a image as brackground into a Frame
     public Fondo(String imagen, JFrame frame) {
         ImageIcon icon = Ajustar.ResizeJF(new ImageIcon(".\\src\\main\\java\\Recursos/" + imagen), frame);
         frame.setLayout(new BorderLayout());
