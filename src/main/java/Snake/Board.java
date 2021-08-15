@@ -5,6 +5,7 @@
  */
 package Snake;
 
+import General.Fondo;
 import General.Resize;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -36,6 +37,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     private String Jugador;
     private Resize Ajustar = new Resize();
     private long tiempoIncio, tiempoFinal, tiempo;
+    private Fondo nBG;
 
  
 
@@ -43,15 +45,18 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
      * Creates new form Board
      */
     public Board() {
-       
+      
     }
     
     public Board(String nombre) {
+        setSize(700, 500);
+        nBG = new Fondo("cespedBG.jpg", this);
         initComponents();
+        jPanel3.setOpaque(false);
         jTextField1.setText(fecha.toLocaleString());
         this.Jugador = nombre;
         jTextField3.setText(Jugador);
-        setSize(700, 500);
+        
         setLocationRelativeTo(null);
         Incializar();
         jPanel1.setVisible(true);
@@ -199,12 +204,12 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -215,28 +220,6 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(null);
-        jPanel3.setVisible(true);
-
-        jButton5.setText("Volver a Jugar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jButton1.setVisible(false);
-        jPanel3.add(jButton5);
-        jButton5.setBounds(130, 290, 120, 50);
-        jPanel3.add(jLabel4);
-        jLabel4.setBounds(10, 40, 160, 180);
-        jPanel3.add(jLabel6);
-        jLabel6.setBounds(190, 10, 200, 250);
-
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(10, 10, 400, 370);
 
         jLabel5.setText("<html>\n<body>\nUse la flechas (← ↑ ↓ →) para moverse:  <br>  ← Derecha  <br> ↑ Arriba <br>  ↓ Abajo  <br> → Izquierda <br> Presione una para continuar...\n</body>\n</html>");
         jLabel5.setToolTipText("   ← ↑ ↓ →");
@@ -260,6 +243,28 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(420, 10, 260, 340);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(null);
+        jPanel3.setVisible(true);
+
+        jButton5.setText("Volver a Jugar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jButton1.setVisible(false);
+        jPanel3.add(jButton5);
+        jButton5.setBounds(130, 290, 120, 50);
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(10, 40, 160, 180);
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(190, 10, 200, 250);
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(10, 10, 400, 370);
 
         jButton1.setText("Volver al Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
