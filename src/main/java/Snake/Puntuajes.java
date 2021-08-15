@@ -26,9 +26,9 @@ public class Puntuajes extends javax.swing.JFrame {
          setSize(830,420);
     }
 
-    /*Fills the arraysList with all and best-sort scores*/
+    /*Funtion that read ('Puntuaje.txt') the scores of all players that have been playing*/
     public void setData() {
-        ArrayList<String[]> lineas = new ArrayList<>();
+        ArrayList<String[]> lineas = new ArrayList<>(); //ArrayList that contains all the score on the txt File
         try {
         File archivo = new File("Puntuajes.txt");
         String linea;
@@ -42,44 +42,40 @@ public class Puntuajes extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-        ArrayList<String[]> Mejores = new ArrayList<>();
-        ArrayList<String[]> lineasCopia = new ArrayList<String[]>(lineas);
+        ArrayList<String[]> Mejores = new ArrayList<>(); //ArrayList that contaiins scores sort by points-time
+        ArrayList<String[]> lineasCopia = new ArrayList<String[]>(lineas); //ArrayList that is a copy of the fist ArrayList of scores to avoid errors 
             while (true) {
             for (int i = 0; i < lineasCopia.size(); i++) {
                 String[] lineaDato = lineasCopia.get(i);
-                boolean mejor = mejoresTiempos(lineaDato, lineasCopia, i);
+                boolean mejor = mejoresTiempos(lineaDato, lineasCopia, i); //Call a function that compares a score with the other ones
                 if (mejor) {
-                    Mejores.add(lineaDato);
-                    lineasCopia.remove(i);
+                    Mejores.add(lineaDato); //Adds the best score to the list
+                    lineasCopia.remove(i); // deletes the best score from the copy
                 }
             }
             if (lineasCopia.size() == 0) {
-                break;
+                break; //Breaks the while cicle just if the copy runs out of scores
             }
             }
             LlenarTablas(Mejores, lineas);
     }
-    
-    /*Fill the tables, one with all scores and another one wiht point-time sort scores*/    
+
+    /*Fill the boths tables, one sort by date of game and the other one with the best*/
     public void LlenarTablas(ArrayList<String[]> tabla1, ArrayList<String[]> tabla2) {
-               for (int i = 0; i < tabla1.size(); i++) {
+               for (int i = 0; i < tabla1.size(); i++) { //A cicle to read the scores in the arrayList
                 String[] data = tabla1.get(i);
                 data[2] = convertTime(data[2]);
-            DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel();
-            modelo.addRow(data); 
-            //jTable2.setModel(modelo);
+            DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel(); //Gets the model of the table
+            modelo.addRow(data);  //Add the score to a row
             }
-            for (int i = 0; i < tabla2.size(); i++) {
+            for (int i = 0; i < tabla2.size(); i++) { //The same as the other one but with the second table
                 String[] data = tabla2.get(i);
-                //data[2] = convertTime(data[2]);
             DefaultTableModel modelo2 = (DefaultTableModel)jTable1.getModel();
             modelo2.addRow(data); 
-            //jTable1.setModel(modelo2);
             }
     }
-    
-       
-    /*select the best score between the other ones (It does that with each score)*/
+
+    /*Commpares a score with the other ones and retunr a boolean value*/
     public boolean mejoresTiempos(String[] dato1, ArrayList<String[]> Lista, int indice) {
         int cond = 0;
         int DatoP = Integer.parseInt(dato1[1]);
