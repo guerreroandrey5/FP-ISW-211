@@ -168,6 +168,8 @@ public class AGame extends javax.swing.JFrame {
         }
         }else if (cantidadW.size() == 0) {
             cantidadW.add(n);
+        } else if (cantidadW.size() == words.size()) {
+            cantidadW = new ArrayList<>();
         }
         cantidadW.add(n);
         indP = n;
@@ -202,6 +204,8 @@ public class AGame extends javax.swing.JFrame {
            cantidad.add(PR);
         } else if (cantidad.size() == 0) {
             cantidad.add(PR);
+        }else if (cantidad.size() == pistas.get(indP).length) {
+            cantidad = new ArrayList<>();
         }
         
         //System.out.println(pistas.get(indP)[PR]);
