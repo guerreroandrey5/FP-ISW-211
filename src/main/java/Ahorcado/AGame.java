@@ -5,9 +5,22 @@
  */
 package Ahorcado;
 
+import General.Fondo;
+import General.Resize;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.ImageIcon;
-import General.*;
+import java.awt.Rectangle;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 /**
  *
@@ -15,20 +28,17 @@ import javax.swing.JOptionPane;
  */
 public class AGame extends javax.swing.JFrame {
     private String Nombre;
-    private String nJ = "";
-    private String secretWord = getSecretWord();
-    int nLSecretWord = secretWord.length();
-    boolean gameEnded = false; 
-    
-    
-    static String getSecretWord(){
-        String [] words = {"GALLINA", "ESCUELA", "SEGUNDO", "DEPORTE", "DOMINIO"};
-        Random r = new Random();
-        int n = r.nextInt(words.length);
-        System.out.println(words[n]);       
-        return words[n];       
-    }
-    String imagenes[] = {
+    private Resize Ajustar = new Resize();
+    private Fondo nFondo;
+    private String secretWord;
+    boolean gameEnded = false;
+    private JLabel[] nLabel;
+    private ArrayList<String> words;
+    private ArrayList<String[]> pistas;
+    private int indP = 0;
+    private ArrayList<Integer> cantidad = new ArrayList<>();
+    private ArrayList<Integer> cantidadW = new ArrayList<>();
+    private String imagenes[] = {
         ".\\src\\main\\java\\Recursos/na.png",
         ".\\src\\main\\java\\Recursos/head.png",
         ".\\src\\main\\java\\Recursos/headandbody.png",
@@ -37,59 +47,216 @@ public class AGame extends javax.swing.JFrame {
     
     
     };
-    int indice = 0;
+    private int indice = 0;
+    int trysP = 0;
+    int trysN = 0;
+
     
     /**
      * Creates new form AJuego
      */
     public AGame() {
-        initComponents();
-        ComGame();
-//        nJ = JOptionPane.showInputDialog("Nombre del Jugador: ");
-//        while (nJ.equals("")){
-//            JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
-//            nJ = JOptionPane.showInputDialog("Nombre del Jugador: ");
-//        }
-    
-        Imgs();
-    }
-    public AGame(String name) {
+        setSize(750,600);
+        nFondo = new Fondo("PizzarraBG.jpg", this);
         initComponents();
         
+        PanelTeclado.setOpaque(false);
+        getData();
+        ComGame();
+        
+        
     }
+    
+    
+    public AGame(String name) {
+        setSize(750,600);
+        nFondo = new Fondo("PizzarraBG.jpg", this);
+        initComponents();
+        
+        PanelTeclado.setOpaque(false);
+        getData();
+        ComGame();
+    }
+    
     public void ComGame(){
-        LetG = "";
-        LetA = "";
-        LetL = "";
-        LetI = "";
-        LetN = "";
-        LblL1.setText("");
-        LblL2.setText("");
-        LblL3.setText("");
-        LblL4.setText("");
-        LblL5.setText("");
-        LblL6.setText("");
-        LblL7.setText("");
+        cantidad = new ArrayList<>();
+        LabelVisor2.setVisible(false);
+        BtnNewGame.setVisible(false);
+        jLabel3.setVisible(false);       
+        jLabel1.setVisible(true);
+        PanelTeclado.setVisible(true);
+        try {
+          for(int n = 0; n < nLabel.length; n++) {
+            remove(nLabel[n]);
+            }  
+          nLabel = null;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        secretWord = getSecretWord();
+        setPista();
         ImageIcon Imagen = new ImageIcon(imagenes[0]);
         LabelVisor.setIcon(Imagen);
         indice = 0;
         trysP = 0;
         trysN = 0;
+ 
+    }
+    
+    private void Cbotones(boolean condicion) {
+        BtnA.setEnabled(condicion);
+        BtnB.setEnabled(condicion);
+        BtnC.setEnabled(condicion);
+        BtnD.setEnabled(condicion);
+        BtnE.setEnabled(condicion);
+        BtnF.setEnabled(condicion);
+        BtnG.setEnabled(condicion);
+        BtnH.setEnabled(condicion);
+        BtnI.setEnabled(condicion);
+        BtnJ.setEnabled(condicion);
+        BtnK.setEnabled(condicion);
+        BtnL.setEnabled(condicion);
+        BtnM.setEnabled(condicion);
+        BtnN.setEnabled(condicion);
+        BtnNn.setEnabled(condicion);
+        BtnO.setEnabled(condicion);
+        BtnP.setEnabled(condicion);
+        BtnQ.setEnabled(condicion);
+        BtnR.setEnabled(condicion);
+        BtnS.setEnabled(condicion);
+        BtnT.setEnabled(condicion);
+        BtnU.setEnabled(condicion);
+        BtnV.setEnabled(condicion);
+        BtnW.setEnabled(condicion);
+        BtnX.setEnabled(condicion);
+        BtnY.setEnabled(condicion);
+        BtnZ.setEnabled(condicion);
     }
     
     
-    private void Imgs(){
-//        LblH.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Cabeza.png"),LblH));
-//        LblT.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Cuerpo.png"),LblT));
-//        LblBD.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/manoI.png"),LblBD));
-//        LblBI.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/manoD.png"),LblBI));
-//        LblPD.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/pieI.png"),LblPD));
-//        LblPI.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/pied.png"),LblPI));
+    public void getData() {
+        words = new ArrayList<String>();
+        pistas = new ArrayList<String[]>();
+        try {
+            File archivo = new File(".\\src\\main\\java\\Recursos/Palabras.txt");
+            String linea;
+            Scanner lector = new Scanner(archivo);
+            while ((linea = lector.nextLine())!= null) {
+                String[] word = linea.split(",");
+                for (int w = 0; w < word.length;w++){
+                    words.add(word[w]);
+                }
+            
+            }
+        } catch (Exception e) {
+        }
+        try {
+            File archivo = new File(".\\src\\main\\java\\Recursos/Pistas.txt");
+            String linea2;
+            Scanner lector2 = new Scanner(archivo);
+            while ((linea2 = lector2.nextLine())!= null) {
+                String[] word2 = linea2.replace("/"," ").split(",");
+                pistas.add(word2);
+            
+            }
+        } catch (Exception e) {
+        }
         
+    }
+    
+    private String getSecretWord(){  
+        Random r = new Random();
+        int n = r.nextInt(words.size());
+        if(cantidadW.size() != words.size() && cantidadW.size() != 0) {
+            System.out.println(cantidadW.contains(n));
+           while (cantidadW.contains(n)) {
+            n = r.nextInt(words.size());
+        }
+        }else if (cantidadW.size() == 0) {
+            cantidadW.add(n);
+        }
+        cantidadW.add(n);
+        indP = n;
+        System.out.println(words.get(n));
+        nLabel = new JLabel[words.get(n).length()];
+        for (int i = 0; i < nLabel.length; i++) {
+            nLabel[i] = new JLabel();
+            nLabel[i].setBounds(new Rectangle(15, (i+1)*40, 60, 25)); 
+            if (i == 0) {
+                nLabel[i].setLocation(130,380);
+            } else {
+                nLabel[i].setLocation((nLabel[i-1].getX()+30), 380);
+            }
+            Font style = new Font("Bookman Old Style", Font.PLAIN, 24);
+            nLabel[i].setText("__");
+            nLabel[i].setForeground(Color.white);
+            nLabel[i].setFont(style);
+            add(nLabel[i],null);
+        }
+        return words.get(n);       
+    }
+    
+    private void setPista() {
+        Random rand = new Random();
+        int PR = rand.nextInt(pistas.get(indP).length);
+        if(cantidad.size() != pistas.get(indP).length && cantidad.size() != 0) {
+            System.out.println(cantidad.contains(PR));
+           while (cantidad.contains(PR)) {
+            PR = rand.nextInt(pistas.get(indP).length);
+        }
+           cantidad.add(PR);
+        } else if (cantidad.size() == 0) {
+            cantidad.add(PR);
+        }
         
-//        ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
-//        this.setIconImage(icono.getImage());
-}
+        System.out.println(pistas.get(indP)[PR]);
+        jLabel1.setText(pistas.get(indP)[PR]);
+    }
+    
+    private void Findeljuego(boolean condicion) {
+        Cbotones(false);
+        LabelVisor2.setVisible(true);
+        BtnNewGame.setVisible(true);
+        if (condicion) {
+            jLabel3.setText("Has Salvado a Kermit, hurra!!!");
+            jLabel3.setVisible(true);
+            jLabel1.setVisible(false);
+            PanelTeclado.setVisible(false);
+            ImageIcon gif = Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/fynK.gif"), LabelVisor);
+            LabelVisor.setIcon(gif);
+            gif.setImageObserver(LabelVisor);
+            LabelVisor2.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Victory.png"), LabelVisor2));
+            
+        } else {
+            PanelTeclado.setVisible(false);
+            LabelVisor2.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Fallaste.jpg"), LabelVisor2));
+        }
+    }
+    
+    public void Comprobar(char Letra, JButton btn) {
+        int correct = 0;
+        for(int l = 0; l < secretWord.length(); l++) {
+            System.out.println(secretWord.charAt(l));
+            if(Letra == secretWord.charAt(l)) {
+                nLabel[l].setText(String.valueOf(secretWord.charAt(l)));
+                trysP += 1;
+                correct +=1;
+                if (trysP == secretWord.length()){
+                    //JOptionPane.showMessageDialog(null, "Has Salvado a Kermit, hurra!!!");
+                    Findeljuego(true);
+                }
+            }
+            }
+        btn.setEnabled(false);
+        if (correct == 0) {
+              indice++;
+              setPista();
+              ImageIcon Imagen = new ImageIcon(imagenes[indice]);
+              LabelVisor.setIcon(Imagen);
+              if (indice == (imagenes.length-1))
+                  Findeljuego(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,25 +296,15 @@ public class AGame extends javax.swing.JFrame {
         BtnZ = new javax.swing.JButton();
         BtnNn = new javax.swing.JButton();
         BtnExit = new javax.swing.JButton();
-        LblE2 = new javax.swing.JLabel();
-        LblL1 = new javax.swing.JLabel();
-        LblL2 = new javax.swing.JLabel();
-        LblL3 = new javax.swing.JLabel();
-        LblL4 = new javax.swing.JLabel();
-        LblL5 = new javax.swing.JLabel();
-        LblL6 = new javax.swing.JLabel();
-        LblL7 = new javax.swing.JLabel();
-        LblE3 = new javax.swing.JLabel();
-        LblE4 = new javax.swing.JLabel();
-        LblE5 = new javax.swing.JLabel();
-        LblE6 = new javax.swing.JLabel();
-        LblE7 = new javax.swing.JLabel();
-        LblE8 = new javax.swing.JLabel();
-        LabelVisor = new javax.swing.JLabel();
+        LabelVisor2 = new javax.swing.JLabel();
         BtnNewGame = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        LabelVisor = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(555, 458));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(730, 510));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -398,7 +555,7 @@ public class AGame extends javax.swing.JFrame {
         BtnNn.setBounds(140, 152, 50, 40);
 
         getContentPane().add(PanelTeclado);
-        PanelTeclado.setBounds(250, 10, 270, 350);
+        PanelTeclado.setBounds(430, 70, 270, 350);
 
         BtnExit.setText("Volver");
         BtnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -407,68 +564,11 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnExit);
-        BtnExit.setBounds(430, 370, 90, 40);
+        BtnExit.setBounds(590, 440, 90, 40);
 
-        LblE2.setText("_");
-        getContentPane().add(LblE2);
-        LblE2.setBounds(160, 370, 20, 20);
-
-        LblL1.setText("G");
-        LblL1.setName("LblL1"); // NOI18N
-        getContentPane().add(LblL1);
-        LblL1.setBounds(40, 370, 10, 16);
-
-        LblL2.setText("A");
-        getContentPane().add(LblL2);
-        LblL2.setBounds(60, 370, 10, 16);
-
-        LblL3.setText("L");
-        getContentPane().add(LblL3);
-        LblL3.setBounds(80, 370, 10, 16);
-
-        LblL4.setText("L");
-        getContentPane().add(LblL4);
-        LblL4.setBounds(100, 370, 10, 16);
-
-        LblL5.setText("I");
-        getContentPane().add(LblL5);
-        LblL5.setBounds(120, 370, 10, 16);
-
-        LblL6.setText("N");
-        getContentPane().add(LblL6);
-        LblL6.setBounds(140, 370, 10, 16);
-
-        LblL7.setText("A");
-        getContentPane().add(LblL7);
-        LblL7.setBounds(160, 370, 10, 16);
-
-        LblE3.setText("_");
-        getContentPane().add(LblE3);
-        LblE3.setBounds(40, 370, 20, 20);
-
-        LblE4.setText("_");
-        getContentPane().add(LblE4);
-        LblE4.setBounds(60, 370, 20, 20);
-
-        LblE5.setText("_");
-        getContentPane().add(LblE5);
-        LblE5.setBounds(80, 370, 20, 20);
-
-        LblE6.setText("_");
-        getContentPane().add(LblE6);
-        LblE6.setBounds(100, 370, 20, 20);
-
-        LblE7.setText("_");
-        getContentPane().add(LblE7);
-        LblE7.setBounds(120, 370, 20, 20);
-
-        LblE8.setText("_");
-        getContentPane().add(LblE8);
-        LblE8.setBounds(140, 370, 20, 20);
-
-        LabelVisor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        getContentPane().add(LabelVisor);
-        LabelVisor.setBounds(50, 70, 150, 210);
+        LabelVisor2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        getContentPane().add(LabelVisor2);
+        LabelVisor2.setBounds(430, 110, 270, 310);
 
         BtnNewGame.setText("Nuevo Juego");
         BtnNewGame.addActionListener(new java.awt.event.ActionListener() {
@@ -477,71 +577,46 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnNewGame);
-        BtnNewGame.setBounds(320, 370, 100, 40);
+        BtnNewGame.setBounds(460, 440, 100, 40);
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("j_Label1");
+        jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 60, 420, 50);
+
+        LabelVisor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        getContentPane().add(LabelVisor);
+        LabelVisor.setBounds(150, 120, 150, 210);
+
+        jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Has Salvado a Kermit!!!!!!!!!!!");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(20, 10, 710, 100);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('H',BtnH);
     }//GEN-LAST:event_BtnHActionPerformed
 
     private void BtnMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMActionPerformed
-        if (indice == 5 ) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('M',BtnM);
     }//GEN-LAST:event_BtnMActionPerformed
 
     private void BtnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAActionPerformed
-        if (secretWord.contains("A")){
-        if (indice < 5){
-             LetA += "A";
-             LblL2.setText(LetA);
-             LblL7.setText(LetA);
-             trysP = trysP + 1;
-         
-        if (trysP == 5){
-             JOptionPane.showMessageDialog(null, "Has Salvado a Kermit, hurra!!!");
-        }
-        else{
-             JOptionPane.showMessageDialog(null, "Excelente, falta menos para rescatar a nuestro amigo saltarín");
-             BtnA.setEnabled(false);
-        }
-        
-        }else{}
-        }else{
-          if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('A',BtnA);
     }//GEN-LAST:event_BtnAActionPerformed
-    }
+    
     private void BtnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBActionPerformed
-          if (indice ==5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                }         
+         Comprobar('B',BtnB);       
     }//GEN-LAST:event_BtnBActionPerformed
 
     private void BtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExitActionPerformed
@@ -556,261 +631,100 @@ public class AGame extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnExitActionPerformed
 
     private void BtnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewGameActionPerformed
+        Cbotones(true);
         ComGame();
-        secretWord = getSecretWord();
     }//GEN-LAST:event_BtnNewGameActionPerformed
 
     private void BtnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('C',BtnC);
     }//GEN-LAST:event_BtnCActionPerformed
 
     private void BtnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('D',BtnD);
     }//GEN-LAST:event_BtnDActionPerformed
 
     private void BtnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('E',BtnE);
     }//GEN-LAST:event_BtnEActionPerformed
 
     private void BtnFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('F',BtnF);
     }//GEN-LAST:event_BtnFActionPerformed
 
     private void BtnGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('G',BtnG);
     }//GEN-LAST:event_BtnGActionPerformed
 
     private void BtnIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('I',BtnI);
     }//GEN-LAST:event_BtnIActionPerformed
 
     private void BtnJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('J',BtnJ);
     }//GEN-LAST:event_BtnJActionPerformed
 
     private void BtnKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('K',BtnK);
     }//GEN-LAST:event_BtnKActionPerformed
 
     private void BtnLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('L',BtnL);
     }//GEN-LAST:event_BtnLActionPerformed
 
     private void BtnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+       Comprobar('N',BtnN);
     }//GEN-LAST:event_BtnNActionPerformed
 
     private void BtnNnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNnActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('Ñ',BtnN);
     }//GEN-LAST:event_BtnNnActionPerformed
 
     private void BtnOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('O',BtnO);
     }//GEN-LAST:event_BtnOActionPerformed
 
     private void BtnPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('P',BtnP);
     }//GEN-LAST:event_BtnPActionPerformed
 
     private void BtnQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('Q',BtnQ);
     }//GEN-LAST:event_BtnQActionPerformed
 
     private void BtnRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('R',BtnR);
     }//GEN-LAST:event_BtnRActionPerformed
 
     private void BtnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('S',BtnS);
     }//GEN-LAST:event_BtnSActionPerformed
 
     private void BtnTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('T',BtnT);
     }//GEN-LAST:event_BtnTActionPerformed
 
     private void BtnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('U',BtnU);
     }//GEN-LAST:event_BtnUActionPerformed
 
     private void BtnVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('V',BtnV);
     }//GEN-LAST:event_BtnVActionPerformed
 
     private void BtnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnWActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('W',BtnW);
     }//GEN-LAST:event_BtnWActionPerformed
 
     private void BtnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('X',BtnX);
     }//GEN-LAST:event_BtnXActionPerformed
 
     private void BtnYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnYActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('Y',BtnY);
     }//GEN-LAST:event_BtnYActionPerformed
 
     private void BtnZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnZActionPerformed
-        if (indice == 5) {
-                indice = 5;
-        }
-        else{
-                indice++;
-                ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-                LabelVisor.setIcon(Imagen);
-                } 
+        Comprobar('Z',BtnZ);
     }//GEN-LAST:event_BtnZActionPerformed
 
     /**
@@ -881,27 +795,10 @@ public class AGame extends javax.swing.JFrame {
     private javax.swing.JButton BtnY;
     private javax.swing.JButton BtnZ;
     private javax.swing.JLabel LabelVisor;
-    private javax.swing.JLabel LblE2;
-    private javax.swing.JLabel LblE3;
-    private javax.swing.JLabel LblE4;
-    private javax.swing.JLabel LblE5;
-    private javax.swing.JLabel LblE6;
-    private javax.swing.JLabel LblE7;
-    private javax.swing.JLabel LblE8;
-    private javax.swing.JLabel LblL1;
-    private javax.swing.JLabel LblL2;
-    private javax.swing.JLabel LblL3;
-    private javax.swing.JLabel LblL4;
-    private javax.swing.JLabel LblL5;
-    private javax.swing.JLabel LblL6;
-    private javax.swing.JLabel LblL7;
+    private javax.swing.JLabel LabelVisor2;
     private javax.swing.JPanel PanelTeclado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
-     int trysP = 0;
-     int trysN = 0;
-     String LetG = "";
-     String LetA = "";
-     String LetL = "";
-     String LetI = "";
-     String LetN = "";
+
 }
