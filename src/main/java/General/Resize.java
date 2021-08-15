@@ -28,4 +28,12 @@ public class Resize {
         
         return newIMG;
     }
+    
+    public ImageIcon ResizeJF(ImageIcon img, JFrame dimensions) {
+        
+        Image Oimg = img.getImage().getScaledInstance(dimensions.getWidth(), dimensions.getHeight(), Image.SCALE_REPLICATE);
+        ImageIcon newIMG = new ImageIcon(Oimg);
+        
+        return newIMG;
+    }
 }
