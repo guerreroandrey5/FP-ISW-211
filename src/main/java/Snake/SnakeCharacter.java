@@ -17,14 +17,15 @@ import javax.swing.JPanel;
 public class SnakeCharacter {
     
     JPanel panel;
-    private Point[] cuerpo;
-    public static final int Limite = 20;
-    private int cabeza;
-    private int cola;
-    private double velocidad;
-    private int diametro;
-    private int X, Y, largo;
+    private Point[] cuerpo; // A point value to define the snake size
+    public static final int Limite = 20; // The limit of the snake size
+    private int cabeza; //A variable to set the head value
+    private int cola; //A variable used to identify the tail
+    private double velocidad; //The speed of the snake
+    private int diametro; //The size of the head and body
+    private int X, Y, largo; // Variables to set the positiona and large of the snake
     
+    /*Inicialize the snake setting its position to the middle of the panel and the size of the head*/
     public SnakeCharacter(JPanel board) {
         panel = board;
         cuerpo = new Point[Limite];
@@ -37,12 +38,11 @@ public class SnakeCharacter {
         diametro = 13;
     }
     
-    /*Makes faster the snake*/
+    /*Enhance the speed of the sneak*/
     public void AumentarVelocidad() {
         this.velocidad = (velocidad + 0.2);
     }
-    
-    /*Updates the Snake and checks if the players has loose*/
+    /*Updates the snake movement and does the comparation to check if the snake has died*/
     public boolean actualizar(int direction) {
  
             
@@ -77,7 +77,7 @@ public class SnakeCharacter {
         
     }
     
-    /*Draws the snake with the size and lalrge parameters */
+    /*Draws the snake figure with the size parametres (head and tail) and set their colors*/
     public void draw(Graphics g) {
         g.setColor(Color.green);
         if(largo > 1) {
@@ -106,7 +106,7 @@ public class SnakeCharacter {
     public int getLargo(){
         return largo;
     }
-    /*Makes larger the snake*/
+    
     public void setLargo(){
         this.largo += 1;
     }
