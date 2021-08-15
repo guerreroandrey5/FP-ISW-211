@@ -59,7 +59,7 @@ public class SnakeCharacter {
                 break;
         }
         
-        if (((X >= (panel.getWidth())-10) || (Y >= (panel.getHeight()-10)) || (X < -7) || (Y < -7)) || (largo >= 10 && cuerpo[cabeza].distance(cuerpo[cola]) < 2)) {
+        if (((X >= (panel.getWidth())-10) || (Y >= (panel.getHeight()-10)) || (X < -7) || (Y < -7)) || (largo >= 5 && cuerpo[cabeza].distance(cuerpo[cola]) < 5)) {
             return false;
         }
 
