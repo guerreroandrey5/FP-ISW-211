@@ -18,8 +18,9 @@ public class PrinMenu extends javax.swing.JFrame {
      * Creates new form PrinMenu
      */
     public PrinMenu() {
-        setSize(400,300);
-        SFondo = new Fondo("PrincipalBG.jpg",this);
+        setSize(400,300); // set the menu to a 400 widht and 300 height
+        SFondo = new Fondo("PrincipalBG.jpg",this); //Set the background image
+        setLocationRelativeTo(null);
         initComponents();
         
     }
