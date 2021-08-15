@@ -1,0 +1,8 @@
+Ave/de/granja,Pone/huevos,Mama/de/los/pollitos
+Lugar/donde/se/estudia,Necesitas/cuadernos,Encuentras/profesores
+Animal,Es/omnivoro,Da/leche
+Deporte,Los/jugadores/corren,Se/juega/con/pelota,Se/juega/con/los/pies,Hay/11/jugadores
+Tiene/una/larga/trompa,Es/grande,Tiene/orejas/grandes
+Es/cuadrada,Se/usa/para/guardar/cosas
+Es/una/fruta,Es/redonda,Es/pequeña
+Es/una/parte/del/cuerpo,Se/encuentra/en/la/cara,Sirve/para/oler
