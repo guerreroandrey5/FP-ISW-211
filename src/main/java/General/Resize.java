@@ -20,7 +20,7 @@ public class Resize {
        
     }
     
-    /*Changes the size of the images and return a new one*/
+    /*Changes the margins of the images and return a new one*/
     public ImageIcon Resize(ImageIcon img, JLabel dimensions) {
         
         Image Oimg = img.getImage().getScaledInstance(dimensions.getWidth(), dimensions.getHeight(), Image.SCALE_REPLICATE);
@@ -29,7 +29,7 @@ public class Resize {
         return newIMG;
     }
     
-    /*Changes the size of the images and return a new one as backgroud*/
+    /*Changes the margins of the images and return a new one to set it as a brackground image*/
     public ImageIcon ResizeJF(ImageIcon img, JFrame dimensions) {
         
         Image Oimg = img.getImage().getScaledInstance(dimensions.getWidth(), dimensions.getHeight(), Image.SCALE_REPLICATE);
