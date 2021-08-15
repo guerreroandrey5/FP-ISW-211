@@ -69,6 +69,8 @@ public class AGame extends javax.swing.JFrame {
         ComGame();
     }
     
+    
+    /*Inizialice the game setting the variables in their beginning state*/
     public void ComGame(){
         cantidad = new ArrayList<>();
         LabelVisor2.setVisible(false);
@@ -82,7 +84,6 @@ public class AGame extends javax.swing.JFrame {
             }  
           LblSecretWord = null;
         } catch (Exception e) {
-            //System.out.println(e);
         }
         secretWord = getSecretWord();
         setPista();
@@ -94,6 +95,7 @@ public class AGame extends javax.swing.JFrame {
  
     }
     
+    /*Disables and Enables the butons*/
     private void Cbotones(boolean condicion) {
         BtnA.setEnabled(condicion);
         BtnB.setEnabled(condicion);
@@ -124,10 +126,10 @@ public class AGame extends javax.swing.JFrame {
         BtnZ.setEnabled(condicion);
     }
     
-    
+    /*Read the Files to get the words and clues or hints*/
     public void getData() {
-        words = new ArrayList<String>();
-        pistas = new ArrayList<String[]>();
+        words = new ArrayList<String>(); //ArrayList that contains the words
+        pistas = new ArrayList<String[]>(); //ArrayList that contains the hints
         try {
             File archivo = new File(".\\src\\main\\java\\Recursos/Palabras.txt");
             String linea;
@@ -155,6 +157,7 @@ public class AGame extends javax.swing.JFrame {
         
     }
     
+    // Selects a random world making 
     private String getSecretWord(){  
         Random r = new Random();
         int n = r.nextInt(words.size());
@@ -187,6 +190,7 @@ public class AGame extends javax.swing.JFrame {
         return words.get(n);       
     }
     
+    /*Get the hints of the random word and select one randomly*/
     private void setPista() {
         Random rand = new Random();
         int PR = rand.nextInt(pistas.get(indP).length);
@@ -204,6 +208,7 @@ public class AGame extends javax.swing.JFrame {
         LblHints.setText(pistas.get(indP)[PR]);
     }
     
+    /*End the game and set the playscreen on Win on Loose depending on the player actions*/
     private void Findeljuego(boolean condicion) {
         Cbotones(false);
         LabelVisor2.setVisible(true);
@@ -225,6 +230,8 @@ public class AGame extends javax.swing.JFrame {
         }
     }
     
+    
+    /*Check if the letter selected by the player is in the secretword*/
     public void Comprobar(char Letra, JButton btn) {
         int correct = 0;
         for(int l = 0; l < secretWord.length(); l++) {
@@ -547,12 +554,12 @@ public class AGame extends javax.swing.JFrame {
         PanelTeclado.add(BtnNn);
         BtnNn.setBounds(140, 152, 50, 40);
 
-        LabelVisor2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        PanelTeclado.add(LabelVisor2);
-        LabelVisor2.setBounds(0, 20, 270, 310);
-
         getContentPane().add(PanelTeclado);
-        PanelTeclado.setBounds(430, 60, 270, 350);
+        PanelTeclado.setBounds(410, 50, 270, 350);
+
+        LabelVisor2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        getContentPane().add(LabelVisor2);
+        LabelVisor2.setBounds(410, 70, 270, 310);
 
         BtnExit.setText("Volver");
         BtnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -561,7 +568,7 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnExit);
-        BtnExit.setBounds(590, 410, 90, 40);
+        BtnExit.setBounds(580, 420, 90, 40);
 
         BtnNewGame.setText("Nuevo Juego");
         BtnNewGame.addActionListener(new java.awt.event.ActionListener() {
@@ -570,7 +577,7 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnNewGame);
-        BtnNewGame.setBounds(460, 410, 100, 40);
+        BtnNewGame.setBounds(450, 420, 100, 40);
 
         LblHints.setBackground(new java.awt.Color(255, 255, 255));
         LblHints.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
@@ -589,7 +596,7 @@ public class AGame extends javax.swing.JFrame {
         LblAlert.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblAlert.setText("Has Salvado a Kermit!!!");
         getContentPane().add(LblAlert);
-        LblAlert.setBounds(-120, 0, 710, 100);
+        LblAlert.setBounds(0, 0, 720, 100);
 
         pack();
         setLocationRelativeTo(null);
