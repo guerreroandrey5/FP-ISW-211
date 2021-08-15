@@ -143,7 +143,7 @@ public class Gato extends javax.swing.JFrame {
         try {
             File archivo = new File("HistorialGato.txt");
             FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" + ", " + fecha.toLocaleString() + "\n");           
+            writez.write(nJ1+ ", tiene " + LblPts1.getText() + " Puntos || " + nJ2 + ", tiene " + LblPts2.getText() + " Puntos" + ", " + fecha.toLocaleString() + "\n");           
             writez.close();
         } catch (Exception e) {
         }
@@ -225,6 +225,8 @@ public class Gato extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Lblf = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         PanelGato = new javax.swing.JPanel();
         Btn1 = new javax.swing.JButton();
         Btn2 = new javax.swing.JButton();
@@ -237,7 +239,6 @@ public class Gato extends javax.swing.JFrame {
         Btn9 = new javax.swing.JButton();
         BtnNew = new javax.swing.JButton();
         LblFHoy = new javax.swing.JLabel();
-        Lblf = new javax.swing.JLabel();
         LblP1 = new javax.swing.JLabel();
         LblP2 = new javax.swing.JLabel();
         LblPts1 = new javax.swing.JLabel();
@@ -245,11 +246,17 @@ public class Gato extends javax.swing.JFrame {
         BtnMen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TicTacToe");
+        setName("JGato"); // NOI18N
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(63, 63, 63));
+
+        PanelGato.setBackground(new java.awt.Color(63, 63, 63));
         PanelGato.setName("PanelGato"); // NOI18N
         PanelGato.setLayout(new java.awt.GridLayout(3, 3));
 
+        Btn1.setBackground(new java.awt.Color(63, 63, 63));
         Btn1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +265,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn1);
 
+        Btn2.setBackground(new java.awt.Color(63, 63, 63));
         Btn2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +274,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn2);
 
+        Btn3.setBackground(new java.awt.Color(63, 63, 63));
         Btn3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +283,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn3);
 
+        Btn4.setBackground(new java.awt.Color(63, 63, 63));
         Btn4.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +292,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn4);
 
+        Btn5.setBackground(new java.awt.Color(63, 63, 63));
         Btn5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +301,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn5);
 
+        Btn6.setBackground(new java.awt.Color(63, 63, 63));
         Btn6.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,6 +310,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn6);
 
+        Btn7.setBackground(new java.awt.Color(63, 63, 63));
         Btn7.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,6 +319,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn7);
 
+        Btn8.setBackground(new java.awt.Color(63, 63, 63));
         Btn8.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +328,7 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn8);
 
+        Btn9.setBackground(new java.awt.Color(63, 63, 63));
         Btn9.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         Btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,6 +337,8 @@ public class Gato extends javax.swing.JFrame {
         });
         PanelGato.add(Btn9);
 
+        BtnNew.setBackground(new java.awt.Color(63, 63, 63));
+        BtnNew.setForeground(new java.awt.Color(204, 204, 204));
         BtnNew.setText("Nuevo Juego");
         BtnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,16 +346,23 @@ public class Gato extends javax.swing.JFrame {
             }
         });
 
+        LblFHoy.setForeground(new java.awt.Color(204, 204, 204));
         LblFHoy.setText("Fecha y hora de Juego:");
 
+        LblP1.setForeground(new java.awt.Color(204, 204, 204));
         LblP1.setText("Jugador 1:");
 
+        LblP2.setForeground(new java.awt.Color(204, 204, 204));
         LblP2.setText("Jugador 2:");
 
+        LblPts1.setForeground(new java.awt.Color(204, 204, 204));
         LblPts1.setText("0");
 
+        LblPts2.setForeground(new java.awt.Color(204, 204, 204));
         LblPts2.setText("0");
 
+        BtnMen.setBackground(new java.awt.Color(63, 63, 63));
+        BtnMen.setForeground(new java.awt.Color(204, 204, 204));
         BtnMen.setText("Volver al menú");
         BtnMen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,61 +370,75 @@ public class Gato extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LblFHoy)
+                            .addComponent(BtnNew))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LblP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LblP1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblPts1)
+                            .addComponent(LblPts2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 46, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnMen)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblFHoy)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblP1)
+                            .addComponent(LblPts1))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblP2)
+                            .addComponent(LblPts2)
+                            .addComponent(BtnNew))))
+                .addGap(15, 15, 15)
+                .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnMen)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 43, Short.MAX_VALUE)
-                        .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LblFHoy)
-                            .addComponent(BtnNew))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Lblf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(LblP2, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                            .addComponent(LblP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblPts1)
-                            .addComponent(LblPts2))
-                        .addGap(32, 32, 32))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnMen)
-                .addContainerGap())
+                .addGap(132, 132, 132)
+                .addComponent(Lblf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(137, 137, 137))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(BtnNew))
-                    .addComponent(LblFHoy)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Lblf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LblP1)
-                            .addComponent(LblPts1))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LblP2)
-                            .addComponent(LblPts2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(PanelGato, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnMen)
-                .addGap(11, 11, 11))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Lblf)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -660,6 +698,7 @@ public class Gato extends javax.swing.JFrame {
     private javax.swing.JLabel LblPts2;
     private javax.swing.JLabel Lblf;
     private javax.swing.JPanel PanelGato;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>
 }
