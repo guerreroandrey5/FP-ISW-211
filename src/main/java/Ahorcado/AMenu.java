@@ -38,6 +38,8 @@ public class AMenu extends javax.swing.JFrame {
         BtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ahorcado");
+        setName("AMen"); // NOI18N
 
         BtnPlay.setText("Jugar");
         BtnPlay.addActionListener(new java.awt.event.ActionListener() {

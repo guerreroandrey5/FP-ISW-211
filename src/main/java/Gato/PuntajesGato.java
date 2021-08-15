@@ -5,8 +5,10 @@
  */
 package Gato;
 
+import java.awt.Color;
 import java.io.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +34,8 @@ public class PuntajesGato extends javax.swing.JFrame {
     }
     
     void THistoryLoad(){
+        DefaultTableCellRenderer MyHeaderRender = new DefaultTableCellRenderer();
+        MyHeaderRender.setBackground(Color.decode("#5A5A5A"));             
         File archivo = null;
         FileReader FileR = null;
         BufferedReader BufferedR = null;
@@ -47,6 +51,7 @@ public class PuntajesGato extends javax.swing.JFrame {
                 RecordsTablez.addRow(new String []{data});
             }   
             RecordsTable.setModel(RecordsTablez);
+            RecordsTable.getTableHeader().getColumnModel().getColumn(0).setHeaderRenderer(MyHeaderRender);
         }catch (Exception e){JOptionPane.showMessageDialog(null, "No hay datos registrados sobre Records, el registro se mostrará en blanco");}finally{try{if(null!=FileR) {FileR.close();}}catch(IOException e2){
             
         }
@@ -54,6 +59,8 @@ public class PuntajesGato extends javax.swing.JFrame {
     }
     
     void TRecordsLoad(){
+        DefaultTableCellRenderer MyHeaderRender = new DefaultTableCellRenderer();
+        MyHeaderRender.setBackground(Color.decode("#5A5A5A"));      
         File archivo = null;
         FileReader FileR = null;
         BufferedReader BufferedR = null;
@@ -69,6 +76,7 @@ public class PuntajesGato extends javax.swing.JFrame {
                 HistoryTablez.addRow(new String []{data});
             }   
             HistoryTable.setModel(HistoryTablez);
+            HistoryTable.getTableHeader().getColumnModel().getColumn(0).setHeaderRenderer(MyHeaderRender);
         }catch (Exception e){JOptionPane.showMessageDialog(null, "No hay datos registrados sobre Historial, el registro se mostrará en blanco");}finally{try{if(null!=FileR) {FileR.close();}}catch(IOException e2){
             
         }
@@ -84,29 +92,25 @@ public class PuntajesGato extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        RecordsTable = new javax.swing.JTable();
-        BtnMenu = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         HistoryTable = new javax.swing.JTable();
-        LblRc = new javax.swing.JLabel();
         LblHP = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        RecordsTable = new javax.swing.JTable();
+        LblRc = new javax.swing.JLabel();
+        BtnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Puntajes de Gato");
+        setTitle("TicTacToe Scores");
+        setBackground(new java.awt.Color(63, 63, 63));
         setName("PGato"); // NOI18N
         setResizable(false);
 
-        RecordsTable.setEnabled(false);
-        jScrollPane1.setViewportView(RecordsTable);
+        jPanel1.setBackground(new java.awt.Color(63, 63, 63));
 
-        BtnMenu.setText("Volver");
-        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnMenuActionPerformed(evt);
-            }
-        });
-
+        HistoryTable.setBackground(new java.awt.Color(63, 63, 63));
+        HistoryTable.setForeground(new java.awt.Color(204, 204, 204));
         HistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -119,50 +123,90 @@ public class PuntajesGato extends javax.swing.JFrame {
             }
         ));
         HistoryTable.setEnabled(false);
+        HistoryTable.setGridColor(new java.awt.Color(63, 63, 63));
+        HistoryTable.setSelectionBackground(new java.awt.Color(63, 63, 63));
+        HistoryTable.setSelectionForeground(new java.awt.Color(63, 63, 63));
+        HistoryTable.setShowGrid(true);
         jScrollPane2.setViewportView(HistoryTable);
 
+        LblHP.setForeground(new java.awt.Color(204, 204, 204));
+        LblHP.setText("Historial de Partidas");
+
+        RecordsTable.setOpaque(true);
+        RecordsTable.setBackground(new java.awt.Color(63, 63, 63));
+        RecordsTable.setForeground(new java.awt.Color(204, 204, 204));
+        RecordsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        RecordsTable.setEnabled(false);
+        RecordsTable.setGridColor(new java.awt.Color(63, 63, 63));
+        RecordsTable.setSelectionBackground(new java.awt.Color(63, 63, 63));
+        RecordsTable.setSelectionForeground(new java.awt.Color(63, 63, 63));
+        RecordsTable.setShowGrid(true);
+        jScrollPane1.setViewportView(RecordsTable);
+
+        LblRc.setForeground(new java.awt.Color(204, 204, 204));
         LblRc.setText("Records");
 
-        LblHP.setText("Historial de Partidas");
+        BtnMenu.setBackground(new java.awt.Color(63, 63, 63));
+        BtnMenu.setForeground(new java.awt.Color(204, 204, 204));
+        BtnMenu.setText("Volver");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblHP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblRc)
+                        .addGap(555, 555, 555))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnMenu)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblRc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LblHP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnMenu))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LblRc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(BtnMenu)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LblHP)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtnMenu)
-                            .addComponent(LblRc)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LblHP)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -219,6 +263,7 @@ public class PuntajesGato extends javax.swing.JFrame {
     private javax.swing.JLabel LblHP;
     private javax.swing.JLabel LblRc;
     private javax.swing.JTable RecordsTable;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

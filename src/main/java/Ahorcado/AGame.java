@@ -7,21 +7,12 @@ package Ahorcado;
 
 import General.Fondo;
 import General.Resize;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import java.util.*;
+import javax.swing.*;
 /**
  *
  * @author Cris
@@ -32,7 +23,7 @@ public class AGame extends javax.swing.JFrame {
     private Fondo nFondo;
     private String secretWord;
     boolean gameEnded = false;
-    private JLabel[] nLabel;
+    private JLabel[] LblSecretWord;
     private ArrayList<String> words;
     private ArrayList<String[]> pistas;
     private int indP = 0;
@@ -82,16 +73,16 @@ public class AGame extends javax.swing.JFrame {
         cantidad = new ArrayList<>();
         LabelVisor2.setVisible(false);
         BtnNewGame.setVisible(false);
-        jLabel3.setVisible(false);       
-        jLabel1.setVisible(true);
+        LblAlert.setVisible(false);       
+        LblHints.setVisible(true);
         PanelTeclado.setVisible(true);
         try {
-          for(int n = 0; n < nLabel.length; n++) {
-            remove(nLabel[n]);
+          for(int n = 0; n < LblSecretWord.length; n++) {
+            remove(LblSecretWord[n]);
             }  
-          nLabel = null;
+          LblSecretWord = null;
         } catch (Exception e) {
-            System.out.println(e);
+            //System.out.println(e);
         }
         secretWord = getSecretWord();
         setPista();
@@ -168,7 +159,7 @@ public class AGame extends javax.swing.JFrame {
         Random r = new Random();
         int n = r.nextInt(words.size());
         if(cantidadW.size() != words.size() && cantidadW.size() != 0) {
-            System.out.println(cantidadW.contains(n));
+            //System.out.println(cantidadW.contains(n));
            while (cantidadW.contains(n)) {
             n = r.nextInt(words.size());
         }
@@ -177,21 +168,21 @@ public class AGame extends javax.swing.JFrame {
         }
         cantidadW.add(n);
         indP = n;
-        System.out.println(words.get(n));
-        nLabel = new JLabel[words.get(n).length()];
-        for (int i = 0; i < nLabel.length; i++) {
-            nLabel[i] = new JLabel();
-            nLabel[i].setBounds(new Rectangle(15, (i+1)*40, 60, 25)); 
+        //System.out.println(words.get(n));
+        LblSecretWord = new JLabel[words.get(n).length()];
+        for (int i = 0; i < LblSecretWord.length; i++) {
+            LblSecretWord[i] = new JLabel();
+            LblSecretWord[i].setBounds(new Rectangle(15, (i+1)*40, 60, 25)); 
             if (i == 0) {
-                nLabel[i].setLocation(130,380);
+                LblSecretWord[i].setLocation(130,380);
             } else {
-                nLabel[i].setLocation((nLabel[i-1].getX()+30), 380);
+                LblSecretWord[i].setLocation((LblSecretWord[i-1].getX()+30), 380);
             }
-            Font style = new Font("Bookman Old Style", Font.PLAIN, 24);
-            nLabel[i].setText("__");
-            nLabel[i].setForeground(Color.white);
-            nLabel[i].setFont(style);
-            add(nLabel[i],null);
+            Font style = new Font("Segoe UI", Font.PLAIN, 24);
+            LblSecretWord[i].setText("__");
+            LblSecretWord[i].setForeground(Color.white);
+            LblSecretWord[i].setFont(style);
+            add(LblSecretWord[i],null);
         }
         return words.get(n);       
     }
@@ -200,7 +191,7 @@ public class AGame extends javax.swing.JFrame {
         Random rand = new Random();
         int PR = rand.nextInt(pistas.get(indP).length);
         if(cantidad.size() != pistas.get(indP).length && cantidad.size() != 0) {
-            System.out.println(cantidad.contains(PR));
+            //System.out.println(cantidad.contains(PR));
            while (cantidad.contains(PR)) {
             PR = rand.nextInt(pistas.get(indP).length);
         }
@@ -209,8 +200,8 @@ public class AGame extends javax.swing.JFrame {
             cantidad.add(PR);
         }
         
-        System.out.println(pistas.get(indP)[PR]);
-        jLabel1.setText(pistas.get(indP)[PR]);
+        //System.out.println(pistas.get(indP)[PR]);
+        LblHints.setText(pistas.get(indP)[PR]);
     }
     
     private void Findeljuego(boolean condicion) {
@@ -218,9 +209,9 @@ public class AGame extends javax.swing.JFrame {
         LabelVisor2.setVisible(true);
         BtnNewGame.setVisible(true);
         if (condicion) {
-            jLabel3.setText("Has Salvado a Kermit, hurra!!!");
-            jLabel3.setVisible(true);
-            jLabel1.setVisible(false);
+            LblAlert.setText("Has Salvado a Kermit, hurra!!!");
+            LblAlert.setVisible(true);
+            LblHints.setVisible(false);
             PanelTeclado.setVisible(false);
             ImageIcon gif = Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/fynK.gif"), LabelVisor);
             LabelVisor.setIcon(gif);
@@ -230,15 +221,16 @@ public class AGame extends javax.swing.JFrame {
         } else {
             PanelTeclado.setVisible(false);
             LabelVisor2.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Fallaste.jpg"), LabelVisor2));
+            LblHints.setText("Ay no, pero que has hecho?");
         }
     }
     
     public void Comprobar(char Letra, JButton btn) {
         int correct = 0;
         for(int l = 0; l < secretWord.length(); l++) {
-            System.out.println(secretWord.charAt(l));
+            //System.out.println(secretWord.charAt(l));
             if(Letra == secretWord.charAt(l)) {
-                nLabel[l].setText(String.valueOf(secretWord.charAt(l)));
+                LblSecretWord[l].setText(String.valueOf(secretWord.charAt(l)));
                 trysP += 1;
                 correct +=1;
                 if (trysP == secretWord.length()){
@@ -252,9 +244,9 @@ public class AGame extends javax.swing.JFrame {
               indice++;
               setPista();
               ImageIcon Imagen = new ImageIcon(imagenes[indice]);
-              LabelVisor.setIcon(Imagen);
+              LabelVisor.setIcon(Imagen);             
               if (indice == (imagenes.length-1))
-                  Findeljuego(false);
+                  Findeljuego(false);                
         }
     }
 
@@ -295,15 +287,16 @@ public class AGame extends javax.swing.JFrame {
         BtnY = new javax.swing.JButton();
         BtnZ = new javax.swing.JButton();
         BtnNn = new javax.swing.JButton();
-        BtnExit = new javax.swing.JButton();
         LabelVisor2 = new javax.swing.JLabel();
+        BtnExit = new javax.swing.JButton();
         BtnNewGame = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        LblHints = new javax.swing.JLabel();
         LabelVisor = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        LblAlert = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setTitle("Ahorcado");
+        setName("AGam"); // NOI18N
         setPreferredSize(new java.awt.Dimension(730, 510));
         setResizable(false);
         getContentPane().setLayout(null);
@@ -554,8 +547,12 @@ public class AGame extends javax.swing.JFrame {
         PanelTeclado.add(BtnNn);
         BtnNn.setBounds(140, 152, 50, 40);
 
+        LabelVisor2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        PanelTeclado.add(LabelVisor2);
+        LabelVisor2.setBounds(0, 20, 270, 310);
+
         getContentPane().add(PanelTeclado);
-        PanelTeclado.setBounds(430, 70, 270, 350);
+        PanelTeclado.setBounds(430, 60, 270, 350);
 
         BtnExit.setText("Volver");
         BtnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -564,11 +561,7 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnExit);
-        BtnExit.setBounds(590, 440, 90, 40);
-
-        LabelVisor2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        getContentPane().add(LabelVisor2);
-        LabelVisor2.setBounds(430, 110, 270, 310);
+        BtnExit.setBounds(590, 410, 90, 40);
 
         BtnNewGame.setText("Nuevo Juego");
         BtnNewGame.addActionListener(new java.awt.event.ActionListener() {
@@ -577,27 +570,26 @@ public class AGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnNewGame);
-        BtnNewGame.setBounds(460, 440, 100, 40);
+        BtnNewGame.setBounds(460, 410, 100, 40);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("j_Label1");
-        jLabel1.setToolTipText("");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 60, 420, 50);
+        LblHints.setBackground(new java.awt.Color(255, 255, 255));
+        LblHints.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        LblHints.setForeground(new java.awt.Color(255, 255, 255));
+        LblHints.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblHints.setToolTipText("");
+        getContentPane().add(LblHints);
+        LblHints.setBounds(20, 60, 420, 50);
 
         LabelVisor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         getContentPane().add(LabelVisor);
         LabelVisor.setBounds(150, 120, 150, 210);
 
-        jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Has Salvado a Kermit!!!!!!!!!!!");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 10, 710, 100);
+        LblAlert.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
+        LblAlert.setForeground(new java.awt.Color(255, 255, 255));
+        LblAlert.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblAlert.setText("Has Salvado a Kermit!!!");
+        getContentPane().add(LblAlert);
+        LblAlert.setBounds(-120, 0, 710, 100);
 
         pack();
         setLocationRelativeTo(null);
@@ -796,9 +788,9 @@ public class AGame extends javax.swing.JFrame {
     private javax.swing.JButton BtnZ;
     private javax.swing.JLabel LabelVisor;
     private javax.swing.JLabel LabelVisor2;
+    private javax.swing.JLabel LblAlert;
+    private javax.swing.JLabel LblHints;
     private javax.swing.JPanel PanelTeclado;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
 }

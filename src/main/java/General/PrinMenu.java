@@ -40,6 +40,8 @@ public class PrinMenu extends javax.swing.JFrame {
         BtnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Juegos El Niño Juguetón");
+        setName("PrinM"); // NOI18N
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
