@@ -219,6 +219,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(null);
 
         jLabel5.setText("<html>\n<body>\nUse la flechas (← ↑ ↓ →) para moverse:  <br>  ← Derecha  <br> ↑ Arriba <br>  ↓ Abajo  <br> → Izquierda <br> Presione una para continuar...\n</body>\n</html>");
