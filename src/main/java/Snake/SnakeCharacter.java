@@ -37,10 +37,12 @@ public class SnakeCharacter {
         diametro = 13;
     }
     
+    /*Makes faster the snake*/
     public void AumentarVelocidad() {
         this.velocidad = (velocidad + 0.2);
     }
     
+    /*Updates the Snake and checks if the players has loose*/
     public boolean actualizar(int direction) {
  
             
@@ -75,7 +77,7 @@ public class SnakeCharacter {
         
     }
     
-    
+    /*Draws the snake with the size and lalrge parameters */
     public void draw(Graphics g) {
         g.setColor(Color.green);
         if(largo > 1) {
@@ -104,7 +106,7 @@ public class SnakeCharacter {
     public int getLargo(){
         return largo;
     }
-    
+    /*Makes larger the snake*/
     public void setLargo(){
         this.largo += 1;
     }

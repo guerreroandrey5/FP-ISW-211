@@ -32,6 +32,8 @@ public class Comida {
     }
     
     
+    
+    /*set the food position on the panel*/
     private Point setPosition() {
         Point pointd = new Point();
         while(true) {
@@ -43,6 +45,7 @@ public class Comida {
          return pointd;
     }
     
+    /*Updates the food position and the snake large when it eats the food and cheks if the playes has win*/
     public boolean Cambio() {
         if (Math.abs((charki.getPosX() + charki.getDiametro() / 2) - (location.x + size.x / 2)) < charki.getDiametro() &&
            (Math.abs((charki.getPosY() + charki.getDiametro() / 2) - (location.y + size.y / 2)) < charki.getDiametro())) {   
@@ -63,7 +66,8 @@ public class Comida {
         return puntos;
     }
     
-    public void draw(Graphics g) {
+  /*Draw the food */
+     public void draw(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(location.x, location.y, size.x, size.y);
     }

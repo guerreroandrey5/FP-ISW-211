@@ -94,6 +94,10 @@ public class Menu extends javax.swing.JFrame {
     private void BtnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPlayActionPerformed
         String nombre = "";
         nombre = jOptionPane1.showInputDialog("Nombre del jugador:");
+        while (nombre.equals("")){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
+            nombre = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
+        }
         Board juego = new Board(nombre);
         setVisible(false);
         juego.setVisible(true);

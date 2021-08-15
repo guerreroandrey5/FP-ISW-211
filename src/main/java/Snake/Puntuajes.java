@@ -26,6 +26,7 @@ public class Puntuajes extends javax.swing.JFrame {
          setSize(830,420);
     }
 
+    /*Fills the arraysList with all and best-sort scores*/
     public void setData() {
         ArrayList<String[]> lineas = new ArrayList<>();
         try {
@@ -59,6 +60,7 @@ public class Puntuajes extends javax.swing.JFrame {
             LlenarTablas(Mejores, lineas);
     }
     
+    /*Fill the tables, one with all scores and another one wiht point-time sort scores*/    
     public void LlenarTablas(ArrayList<String[]> tabla1, ArrayList<String[]> tabla2) {
                for (int i = 0; i < tabla1.size(); i++) {
                 String[] data = tabla1.get(i);
@@ -76,6 +78,8 @@ public class Puntuajes extends javax.swing.JFrame {
             }
     }
     
+       
+    /*select the best score between the other ones (It does that with each score)*/
     public boolean mejoresTiempos(String[] dato1, ArrayList<String[]> Lista, int indice) {
         int cond = 0;
         int DatoP = Integer.parseInt(dato1[1]);
@@ -100,6 +104,7 @@ public class Puntuajes extends javax.swing.JFrame {
         }
     }
     
+    /*Convert the time into readable time*/
     public String convertTime(String fecha) {
         int fechaInt = Integer.parseInt(fecha);
         int segundos = fechaInt / 1000;
