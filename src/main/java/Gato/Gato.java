@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Gato;
-
-//import java.util.Date;
 import java.io.*;
 import java.util.Date;
 import javax.swing.*;
@@ -28,6 +26,11 @@ public class Gato extends javax.swing.JFrame {
      */
     public Gato() {
         initComponents();
+        Load();
+        Imgs();
+    }
+    /*Shows an windows asking for the usernames of both players*/
+    private void Load(){
         nJ1 = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
         while (nJ1.equals("")){
             JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
@@ -43,13 +46,13 @@ public class Gato extends javax.swing.JFrame {
         }
         LblP2.setText(nJ2 + ":");
         Lblf.setText(fecha.toLocaleString());
-        Imgs();
     }
-    
+    /*Loads an icon for the application*/
     private void Imgs(){
         ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
         this.setIconImage(icono.getImage());
     }
+    /*Those if methods decides if the First or the Second Player win*/
     //<editor-fold defaultstate="collapsed" desc="Condiciones para ganar">
     public void ganar() {
         String B1 = Btn1.getText();
@@ -64,28 +67,28 @@ public class Gato extends javax.swing.JFrame {
         
         //Condiciones para el primer jugador
         
-        if (B1.equals("X") && B2.equals("X") && B3.equals("X")){
+        if (B1.equals("X") && B2.equals("X") && B3.equals("X")){//The first row
             ganaJ1();
         }
-        if (B4.equals("X") && B5.equals("X") && B6.equals("X")){
+        if (B4.equals("X") && B5.equals("X") && B6.equals("X")){//The second row
             ganaJ1();
         }
-        if (B7.equals("X") && B8.equals("X") && B9.equals("X")){
+        if (B7.equals("X") && B8.equals("X") && B9.equals("X")){//The third row
             ganaJ1();
         }
-        if (B1.equals("X") && B4.equals("X") && B7.equals("X")){
+        if (B1.equals("X") && B4.equals("X") && B7.equals("X")){//The first column
             ganaJ1();
         }
-        if (B2.equals("X") && B5.equals("X") && B8.equals("X")){
+        if (B2.equals("X") && B5.equals("X") && B8.equals("X")){//The second column
             ganaJ1();
         }
-        if (B3.equals("X") && B6.equals("X") && B9.equals("X")){
+        if (B3.equals("X") && B6.equals("X") && B9.equals("X")){//The third column
             ganaJ1();
         }
-        if (B3.equals("X") && B5.equals("X") && B7.equals("X")){
+        if (B3.equals("X") && B5.equals("X") && B7.equals("X")){//Diagonal left
             ganaJ1();
         }
-        if (B1.equals("X") && B5.equals("X") && B9.equals("X")){
+        if (B1.equals("X") && B5.equals("X") && B9.equals("X")){//Diagonal rigth
             ganaJ1();
         }
         
@@ -117,9 +120,9 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-       
+       /*Those methods read and save the points of the players in a TXT file*/
     //<editor-fold defaultstate="collapsed" desc="Guardar Datos">
-    public void guardarDatosJ1() {
+    public void guardarDatosJ1() {//Save the Top Record of the First Player, only saves when a player press "Back to Menu" button
         try {
             File archivo = new File("PuntajesGato.txt");
             FileWriter write = new FileWriter(archivo, true);
@@ -129,7 +132,7 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     
-    public void guardarDatosJ2() {
+    public void guardarDatosJ2() {//Save the Top Record of the Second Player, only saves when a player press "Back to Menu" button
         try {
             File archivo = new File("PuntajesGato.txt");
             FileWriter write = new FileWriter(archivo, true);
@@ -139,7 +142,7 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     
-    public void guardarDatos() {
+    public void guardarDatos() {//Save the Records History of every Game
         try {
             File archivo = new File("HistorialGato.txt");
             FileWriter writez = new FileWriter(archivo, true);
@@ -149,8 +152,7 @@ public class Gato extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-    
-    
+   
     public void empatar() {
         String B1 = Btn1.getText();
         String B2 = Btn2.getText();
@@ -172,6 +174,7 @@ public class Gato extends javax.swing.JFrame {
     }
     //<editor-fold defaultstate="collapsed" desc="Funciones de ganar y reiniciar el juego">
     public void ganaJ1() {
+        /*Shows a message saying the winner and calculating the time at the won*/
         JOptionPane.showMessageDialog(null, "Ha ganado " + nJ1);
         nGame();
         Contador = Contador * 2;
@@ -181,7 +184,7 @@ public class Gato extends javax.swing.JFrame {
         this.tiempo = tiempoFinal - tiempoIncio;       
         
     }
-
+    /*Shows a message saying the winner and calculating the time at the won*/
     public void ganaJ2() {
         JOptionPane.showMessageDialog(null, "Ha ganado " + nJ2);
         nGame();
@@ -191,9 +194,8 @@ public class Gato extends javax.swing.JFrame {
         this.tiempoFinal = System.currentTimeMillis();
         this.tiempo = tiempoFinal - tiempoIncio;       
     }
-
+    /*Reset all bottons and save the game in the History*/
     public void nGame() {       
-        //Resetea todos los botones y borra su texto
         Btn1.setEnabled(true);
         Btn1.setText("");
         Btn2.setEnabled(true);
@@ -444,6 +446,7 @@ public class Gato extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    /*Every button has the same methods, calling the methods "ganar" and "empatar"*/
     //<editor-fold defaultstate="collapsed" desc="Botones">
     private void Btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2ActionPerformed
         Btn2.setText(equis);

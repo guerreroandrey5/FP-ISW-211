@@ -11,6 +11,7 @@ import java.awt.*;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 import javax.swing.*;
 /**
@@ -18,7 +19,7 @@ import javax.swing.*;
  * @author Cris
  */
 public class AGame extends javax.swing.JFrame {
-    private String Nombre;
+    private String nJ;
     private Resize Ajustar = new Resize();
     private Fondo nFondo;
     private String secretWord;
@@ -41,8 +42,10 @@ public class AGame extends javax.swing.JFrame {
     private int indice = 0;
     int trysP = 0;
     int trysN = 0;
-
-    
+    int Points = 0;
+    int nPoints = 0;
+    private Date fecha = new Date();
+    int cantl = 0;
     /**
      * Creates new form AJuego
      */
@@ -53,9 +56,8 @@ public class AGame extends javax.swing.JFrame {
         
         PanelTeclado.setOpaque(false);
         getData();
-        ComGame();
-        
-        
+        ComGame();   
+        Load();
     }
     
     
@@ -66,9 +68,20 @@ public class AGame extends javax.swing.JFrame {
         
         PanelTeclado.setOpaque(false);
         getData();
-        ComGame();
+        ComGame();       
     }
     
+    private void Load(){
+        nJ = JOptionPane.showInputDialog("Nombre del Jugador: ");
+        while (nJ.equals("")){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
+            nJ = JOptionPane.showInputDialog("Nombre del Jugador: ");
+        }
+
+        LblP.setText(nJ);
+        
+        //Lblf.setText(fecha.toLocaleString());
+    }
     
     /*Inizialice the game setting the variables in their beginning state*/
     public void ComGame(){
@@ -92,7 +105,7 @@ public class AGame extends javax.swing.JFrame {
         indice = 0;
         trysP = 0;
         trysN = 0;
- 
+        
     }
     
     /*Disables and Enables the butons*/
@@ -137,7 +150,7 @@ public class AGame extends javax.swing.JFrame {
             while ((linea = lector.nextLine())!= null) {
                 String[] word = linea.split(",");
                 for (int w = 0; w < word.length;w++){
-                    words.add(word[w]);
+                    words.add(word[w]);                              
                 }
             
             }
@@ -157,12 +170,11 @@ public class AGame extends javax.swing.JFrame {
         
     }
     
-    // Selects a random world making 
+    /* Selects a random word making */
     private String getSecretWord(){  
         Random r = new Random();
         int n = r.nextInt(words.size());
         if(cantidadW.size() != words.size() && cantidadW.size() != 0) {
-            //System.out.println(cantidadW.contains(n));
            while (cantidadW.contains(n)) {
             n = r.nextInt(words.size());
         }
@@ -172,9 +184,9 @@ public class AGame extends javax.swing.JFrame {
             cantidadW = new ArrayList<>();
         }
         cantidadW.add(n);
-        indP = n;
-        //System.out.println(words.get(n));
+        indP = n;      
         LblSecretWord = new JLabel[words.get(n).length()];
+        cantl = LblSecretWord.length;
         for (int i = 0; i < LblSecretWord.length; i++) {
             LblSecretWord[i] = new JLabel();
             LblSecretWord[i].setBounds(new Rectangle(15, (i+1)*40, 60, 25)); 
@@ -197,7 +209,6 @@ public class AGame extends javax.swing.JFrame {
         Random rand = new Random();
         int PR = rand.nextInt(pistas.get(indP).length);
         if(cantidad.size() != pistas.get(indP).length && cantidad.size() != 0) {
-            //System.out.println(cantidad.contains(PR));
            while (cantidad.contains(PR)) {
             PR = rand.nextInt(pistas.get(indP).length);
         }
@@ -207,8 +218,6 @@ public class AGame extends javax.swing.JFrame {
         }else if (cantidad.size() == pistas.get(indP).length) {
             cantidad = new ArrayList<>();
         }
-        
-        //System.out.println(pistas.get(indP)[PR]);
         LblHints.setText(pistas.get(indP)[PR]);
     }
     
@@ -226,6 +235,7 @@ public class AGame extends javax.swing.JFrame {
             LabelVisor.setIcon(gif);
             gif.setImageObserver(LabelVisor);
             LabelVisor2.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Victory.png"), LabelVisor2));
+            guardarDatos();
             
         } else {
             PanelTeclado.setVisible(false);
@@ -237,15 +247,14 @@ public class AGame extends javax.swing.JFrame {
     
     /*Check if the letter selected by the player is in the secretword*/
     public void Comprobar(char Letra, JButton btn) {
-        int correct = 0;
+        int correct = 0;        
         for(int l = 0; l < secretWord.length(); l++) {
-            //System.out.println(secretWord.charAt(l));
             if(Letra == secretWord.charAt(l)) {
                 LblSecretWord[l].setText(String.valueOf(secretWord.charAt(l)));
                 trysP += 1;
-                correct +=1;
+                correct +=1;              
+                Points +=1;               
                 if (trysP == secretWord.length()){
-                    //JOptionPane.showMessageDialog(null, "Has Salvado a Kermit, hurra!!!");
                     Findeljuego(true);
                 }
             }
@@ -254,13 +263,25 @@ public class AGame extends javax.swing.JFrame {
         if (correct == 0) {
               indice++;
               setPista();
+              nPoints +=1;
               ImageIcon Imagen = new ImageIcon(imagenes[indice]);
               LabelVisor.setIcon(Imagen);             
               if (indice == (imagenes.length-1))
                   Findeljuego(false);                
         }
+        if (nPoints == 0){
+            Points = Points * 2;
+        }
     }
-
+public void guardarDatos() {//Save the Records History of every Game
+        try {
+            File archivo = new File("HistorialHanged.txt");
+            FileWriter writez = new FileWriter(archivo, true);
+            writez.write(nJ + ", logró obtener " + Points + " Puntos, pero perdió " + nPoints + fecha.toLocaleString() + "\n");           
+            writez.close();
+        } catch (Exception e) {
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,6 +325,8 @@ public class AGame extends javax.swing.JFrame {
         LblHints = new javax.swing.JLabel();
         LabelVisor = new javax.swing.JLabel();
         LblAlert = new javax.swing.JLabel();
+        LblPH = new javax.swing.JLabel();
+        LblP = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ahorcado");
@@ -584,7 +607,7 @@ public class AGame extends javax.swing.JFrame {
         BtnNewGame.setBounds(450, 420, 100, 40);
 
         LblHints.setBackground(new java.awt.Color(255, 255, 255));
-        LblHints.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        LblHints.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LblHints.setForeground(new java.awt.Color(255, 255, 255));
         LblHints.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblHints.setToolTipText("");
@@ -601,6 +624,16 @@ public class AGame extends javax.swing.JFrame {
         LblAlert.setText("Has Salvado a Kermit!!!");
         getContentPane().add(LblAlert);
         LblAlert.setBounds(0, 0, 720, 100);
+
+        LblPH.setForeground(new java.awt.Color(204, 204, 204));
+        LblPH.setText("Jugador: ");
+        getContentPane().add(LblPH);
+        LblPH.setBounds(10, 10, 60, 16);
+
+        LblP.setForeground(new java.awt.Color(204, 204, 204));
+        LblP.setText("P1");
+        getContentPane().add(LblP);
+        LblP.setBounds(70, 10, 140, 16);
 
         pack();
         setLocationRelativeTo(null);
@@ -628,9 +661,7 @@ public class AGame extends javax.swing.JFrame {
            dispose();
            AMenu AhoMenu = new AMenu();
            AhoMenu.setVisible(true);
-           }
-           
-           
+           }         
     }//GEN-LAST:event_BtnExitActionPerformed
 
     private void BtnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewGameActionPerformed
@@ -801,6 +832,8 @@ public class AGame extends javax.swing.JFrame {
     private javax.swing.JLabel LabelVisor2;
     private javax.swing.JLabel LblAlert;
     private javax.swing.JLabel LblHints;
+    private javax.swing.JLabel LblP;
+    private javax.swing.JLabel LblPH;
     private javax.swing.JPanel PanelTeclado;
     // End of variables declaration//GEN-END:variables
 

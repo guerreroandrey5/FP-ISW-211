@@ -52,25 +52,25 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         setSize(700, 500);
         nBG = new Fondo("cespedBG.jpg", this);
         initComponents();
-        jPanel3.setOpaque(false);
-        jTextField1.setText(fecha.toLocaleString());
+        PlnGame.setOpaque(false);
+        TxtBoxDate.setText(fecha.toLocaleString());
         this.Jugador = nombre;
-        jTextField3.setText(Jugador);
+        TxtBoxPoints.setText(Jugador);
         
         setLocationRelativeTo(null);
         Incializar();
-        jPanel1.setVisible(true);
+        PlnInts.setVisible(true);
                 
     }
     
     public void Incializar() {
         direccion = -1;
         imagen = null;
-        Charki = new SnakeCharacter(jPanel3);
-        bolita = new Comida(jPanel3, Charki);
-        jLabel4.setVisible(false);
-        jLabel6.setVisible(false);
-        jButton5.setVisible(false);
+        Charki = new SnakeCharacter(PlnGame);
+        bolita = new Comida(PlnGame, Charki);
+        Lbl1.setVisible(false);
+        Lbl2.setVisible(false);
+        BtnPlayA.setVisible(false);
         setFocusable(true);
         requestFocus();
         addKeyListener(this);
@@ -95,14 +95,14 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     /*Creates an iamgen to help the drawing of the game*/
     public void Renderizar() {
         if (imagen == null) {
-            imagen = createImage((jPanel3.getWidth()), jPanel3.getHeight());
+            imagen = createImage((PlnGame.getWidth()), PlnGame.getHeight());
             if (imagen != null) {
                 graficcos = imagen.getGraphics();
             }
         }
         
         graficcos.setColor(Color.white);
-        graficcos.fillRect(0, 0, jPanel3.getWidth(), jPanel3.getHeight());
+        graficcos.fillRect(0, 0, PlnGame.getWidth(), PlnGame.getHeight());
         Charki.draw(graficcos);
         bolita.draw(graficcos);
     }
@@ -113,9 +113,9 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     public void DibujarJuego() {
         Graphics g;
         try {
-            g = jPanel3.getGraphics();
+            g = PlnGame.getGraphics();
             if (g != null && imagen != null) {
-                g.drawImage(imagen, 0,0, (jPanel3.getWidth()), (jPanel3.getHeight()), jPanel3);
+                g.drawImage(imagen, 0,0, (PlnGame.getWidth()), (PlnGame.getHeight()), PlnGame);
             }
             g.dispose();
         } catch (Exception e) {
@@ -128,7 +128,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         if(enJuego) {
             boolean Movimiento = Charki.actualizar(direccion);
             boolean Comer = bolita.Cambio();
-            jTextField2.setText(String.valueOf(bolita.getPuntos()));
+            TxtBoxName.setText(String.valueOf(bolita.getPuntos()));
             if(!Comer) {
                 FinalizarJuego(true);
             } else if (!Movimiento) {
@@ -151,16 +151,16 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
         }
         removeKeyListener(this);
         
-        jLabel4.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img1),jLabel4));
-        ImageIcon gif = Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img2), jLabel6);
-        jLabel6.setIcon(gif);
-        gif.setImageObserver(jLabel6);
-        jButton5.setVisible(true);
-        jLabel4.setVisible(true);
-        jLabel6.setVisible(true);
+        Lbl1.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img1),Lbl1));
+        ImageIcon gif = Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/"+img2), Lbl2);
+        Lbl2.setIcon(gif);
+        gif.setImageObserver(Lbl2);
+        BtnPlayA.setVisible(true);
+        Lbl1.setVisible(true);
+        Lbl2.setVisible(true);
         guardarDatos();
         DetenerJuego();
-        jPanel3.repaint();
+        PlnGame.repaint();
     }
     
     
@@ -171,7 +171,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     /*Saves the player score*/
     public void guardarDatos() {
         try {
-            File archivo = new File("Puntuajes.txt");
+            File archivo = new File("Puntajes.txt");
             FileWriter escribir = new FileWriter(archivo, true);
             
             escribir.write(Jugador+ "," + bolita.getPuntos() +","+ Long.toString(tiempo) +","+ Date.from(Instant.now()).toString() + "\n");
@@ -191,7 +191,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     /*Restar the game*/
     public void reiniciar() {
         enJuego = true;
-        jPanel1.setVisible(true);
+        PlnInts.setVisible(true);
         Incializar();
         EmpezarJuego();
     }
@@ -206,125 +206,125 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        PlnInts = new javax.swing.JPanel();
+        PlnInt = new javax.swing.JLabel();
+        PlnGame = new javax.swing.JPanel();
+        BtnPlayA = new javax.swing.JButton();
+        Lbl1 = new javax.swing.JLabel();
+        Lbl2 = new javax.swing.JLabel();
+        BtnExit = new javax.swing.JButton();
+        LblDate = new javax.swing.JLabel();
+        TxtBoxDate = new javax.swing.JTextField();
+        LblName = new javax.swing.JLabel();
+        TxtBoxName = new javax.swing.JTextField();
+        LblPoints = new javax.swing.JLabel();
+        TxtBoxPoints = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(null);
 
-        jLabel5.setText("<html>\n<body>\nUse la flechas (← ↑ ↓ →) para moverse:  <br>  ← Derecha  <br> ↑ Arriba <br>  ↓ Abajo  <br> → Izquierda <br> Presione una para continuar...\n</body>\n</html>");
-        jLabel5.setToolTipText("   ← ↑ ↓ →");
+        PlnInt.setText("<html>\n<body>\nUse la flechas (← ↑ ↓ →) para moverse:  <br>  ← Derecha  <br> ↑ Arriba <br>  ↓ Abajo  <br> → Izquierda <br> Presione una para continuar...\n</body>\n</html>");
+        PlnInt.setToolTipText("   ← ↑ ↓ →");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout PlnIntsLayout = new javax.swing.GroupLayout(PlnInts);
+        PlnInts.setLayout(PlnIntsLayout);
+        PlnIntsLayout.setHorizontalGroup(
+            PlnIntsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlnIntsLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PlnInt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        PlnIntsLayout.setVerticalGroup(
+            PlnIntsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlnIntsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addComponent(PlnInt, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(420, 10, 260, 340);
+        getContentPane().add(PlnInts);
+        PlnInts.setBounds(420, 10, 260, 340);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(null);
-        jPanel3.setVisible(true);
+        PlnGame.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        PlnGame.setForeground(new java.awt.Color(255, 255, 255));
+        PlnGame.setLayout(null);
+        PlnGame.setVisible(true);
 
-        jButton5.setText("Volver a Jugar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnPlayA.setText("Volver a Jugar");
+        BtnPlayA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnPlayAActionPerformed(evt);
             }
         });
-        jButton1.setVisible(false);
-        jPanel3.add(jButton5);
-        jButton5.setBounds(130, 290, 120, 50);
-        jPanel3.add(jLabel4);
-        jLabel4.setBounds(10, 40, 160, 180);
-        jPanel3.add(jLabel6);
-        jLabel6.setBounds(190, 10, 200, 250);
+        BtnExit.setVisible(false);
+        PlnGame.add(BtnPlayA);
+        BtnPlayA.setBounds(130, 290, 120, 50);
+        PlnGame.add(Lbl1);
+        Lbl1.setBounds(10, 40, 160, 180);
+        PlnGame.add(Lbl2);
+        Lbl2.setBounds(190, 10, 200, 250);
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(10, 10, 400, 370);
+        getContentPane().add(PlnGame);
+        PlnGame.setBounds(10, 10, 400, 370);
 
-        jButton1.setText("Volver al Menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnExit.setText("Volver al Menu");
+        BtnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnExitActionPerformed(evt);
             }
         });
-        jButton1.setVisible(true);
-        getContentPane().add(jButton1);
-        jButton1.setBounds(510, 360, 120, 40);
+        BtnExit.setVisible(true);
+        getContentPane().add(BtnExit);
+        BtnExit.setBounds(510, 360, 120, 40);
 
-        jLabel1.setText("Fecha y Hora");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(450, 20, 150, 16);
+        LblDate.setText("Fecha y Hora");
+        getContentPane().add(LblDate);
+        LblDate.setBounds(450, 20, 150, 16);
 
-        jTextField1.setEditable(false);
-        jTextField1.setText("Fehca");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TxtBoxDate.setEditable(false);
+        TxtBoxDate.setText("Fehca");
+        TxtBoxDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TxtBoxDateActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(460, 50, 130, 30);
+        getContentPane().add(TxtBoxDate);
+        TxtBoxDate.setBounds(460, 50, 130, 30);
 
-        jLabel2.setText("Puntuacion");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(450, 240, 170, 16);
+        LblName.setText("Puntuacion");
+        getContentPane().add(LblName);
+        LblName.setBounds(450, 240, 170, 16);
 
-        jTextField2.setEditable(false);
-        jTextField2.setText("Puntuacion");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(460, 270, 130, 30);
+        TxtBoxName.setEditable(false);
+        TxtBoxName.setText("Puntuacion");
+        getContentPane().add(TxtBoxName);
+        TxtBoxName.setBounds(460, 270, 130, 30);
 
-        jLabel3.setText("Jugador");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(450, 130, 170, 16);
+        LblPoints.setText("Jugador");
+        getContentPane().add(LblPoints);
+        LblPoints.setBounds(450, 130, 170, 16);
 
-        jTextField3.setEditable(false);
-        jTextField3.setText("Nombre");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(460, 160, 130, 30);
+        TxtBoxPoints.setEditable(false);
+        TxtBoxPoints.setText("Nombre");
+        getContentPane().add(TxtBoxPoints);
+        TxtBoxPoints.setBounds(460, 160, 130, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnPlayAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPlayAActionPerformed
         reiniciar();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnPlayAActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExitActionPerformed
         Volver();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnExitActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtBoxDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBoxDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtBoxDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,19 +362,19 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton BtnExit;
+    private javax.swing.JButton BtnPlayA;
+    private javax.swing.JLabel Lbl1;
+    private javax.swing.JLabel Lbl2;
+    private javax.swing.JLabel LblDate;
+    private javax.swing.JLabel LblName;
+    private javax.swing.JLabel LblPoints;
+    private javax.swing.JPanel PlnGame;
+    private javax.swing.JLabel PlnInt;
+    private javax.swing.JPanel PlnInts;
+    private javax.swing.JTextField TxtBoxDate;
+    private javax.swing.JTextField TxtBoxName;
+    private javax.swing.JTextField TxtBoxPoints;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -398,7 +398,7 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
           } catch (InterruptedException ex) { }
              t1 = System.nanoTime();  // Get the time again
         }
-        jButton1.setVisible(true);
+        BtnExit.setVisible(true);
         
     }
 
@@ -409,8 +409,8 @@ public class Board extends javax.swing.JFrame implements Runnable, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int tecla = e.getKeyCode();
-        jPanel1.setVisible(false);
-        jButton1.setVisible(false);
+        PlnInts.setVisible(false);
+        BtnExit.setVisible(false);
         
         if(direccion == -1 ) {
             this.tiempoIncio = System.currentTimeMillis();

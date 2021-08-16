@@ -91,17 +91,19 @@ public class AMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPlayActionPerformed
         AGame AhoGame = new AGame();
-        setVisible(false);
+        dispose();
         AhoGame.setVisible(true); 
     }//GEN-LAST:event_BtnPlayActionPerformed
 
     private void BtnScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnScoresActionPerformed
-        
         dispose();
+        APuntajes AhoScores = new APuntajes();
+        AhoScores.setVisible(true);
 
     }//GEN-LAST:event_BtnScoresActionPerformed
 

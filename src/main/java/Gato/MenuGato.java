@@ -20,7 +20,7 @@ public class MenuGato extends javax.swing.JFrame {
         initComponents();
         Imgs();
     }
-    
+    /*Loads an image for the menu and icon for the application*/
 private void Imgs(){
         LblImg.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/TitleScrn.png"),LblImg));
         
@@ -140,7 +140,9 @@ private void Imgs(){
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /*Buttons with confirmation, play and Scores of the Game*/
+    //<editor-fold defaultstate="collapsed" desc="Botones">   
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Realmente desea salir de Tic Tac Toe?", "Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0){
@@ -162,7 +164,7 @@ private void Imgs(){
         dispose();
         TicTacGame.setVisible(true);
     }//GEN-LAST:event_BtnJugarActionPerformed
-
+    //</editor-fold>  
     /**
      * @param args the command line arguments
      */

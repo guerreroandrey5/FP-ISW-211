@@ -34,7 +34,7 @@ public class PrinMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        LblTitle = new javax.swing.JLabel();
         BtnGato = new javax.swing.JButton();
         BtnAhor = new javax.swing.JButton();
         BtnSanke = new javax.swing.JButton();
@@ -45,8 +45,8 @@ public class PrinMenu extends javax.swing.JFrame {
         setName("PrinM"); // NOI18N
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Juegos El Niño Juguetón");
+        LblTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        LblTitle.setText("Juegos El Niño Juguetón");
 
         BtnGato.setText("Gato");
         BtnGato.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +84,7 @@ public class PrinMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jLabel1))
+                        .addComponent(LblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -98,7 +98,7 @@ public class PrinMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(LblTitle)
                 .addGap(44, 44, 44)
                 .addComponent(BtnGato)
                 .addGap(18, 18, 18)
@@ -179,6 +179,6 @@ public class PrinMenu extends javax.swing.JFrame {
     private javax.swing.JButton BtnGato;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JButton BtnSanke;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel LblTitle;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,12 +36,13 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jOptionPane1 = new javax.swing.JOptionPane();
+        OP1 = new javax.swing.JOptionPane();
         BtnPlay = new javax.swing.JButton();
         BtnScores = new javax.swing.JButton();
         BtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Snake");
 
         BtnPlay.setText("Jugar");
         BtnPlay.addActionListener(new java.awt.event.ActionListener() {
@@ -93,19 +94,19 @@ public class Menu extends javax.swing.JFrame {
 
     private void BtnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPlayActionPerformed
         String nombre = "";
-        nombre = jOptionPane1.showInputDialog("Nombre del jugador:");
+        nombre = OP1.showInputDialog("Nombre del jugador:");
         while (nombre.equals("")){
             JOptionPane.showMessageDialog(null, "Debes ingresar un nombre!");
-            nombre = JOptionPane.showInputDialog("Nombre del Jugador 1: ");
+            nombre = JOptionPane.showInputDialog("Nombre del Jugador: ");
         }
         Board juego = new Board(nombre);
         setVisible(false);
         juego.setVisible(true);
-        juego.EmpezarJuego(); // TODO add your handling code here:
+        juego.EmpezarJuego();
     }//GEN-LAST:event_BtnPlayActionPerformed
 
     private void BtnScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnScoresActionPerformed
-        Puntuajes score = new Puntuajes();
+        Puntajes score = new Puntajes();
         setVisible(false);
         score.setVisible(true);
         
@@ -159,6 +160,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BtnExit;
     private javax.swing.JButton BtnPlay;
     private javax.swing.JButton BtnScores;
-    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JOptionPane OP1;
     // End of variables declaration//GEN-END:variables
 }

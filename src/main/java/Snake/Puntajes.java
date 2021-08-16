@@ -7,30 +7,30 @@ package Snake;
 
 
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Cris
  */
-public class Puntuajes extends javax.swing.JFrame {
-
+public class Puntajes extends javax.swing.JFrame {
     /**
-     * Creates new form Puntuajes
+     * Creates new form Puntajes
      */
-    public Puntuajes() {
+    public Puntajes() {
         initComponents();
          setLocationRelativeTo(null);
          setSize(830,420);
+         
     }
 
     /*Funtion that read ('Puntuaje.txt') the scores of all players that have been playing*/
     public void setData() {
         ArrayList<String[]> lineas = new ArrayList<>(); //ArrayList that contains all the score on the txt File
         try {
-        File archivo = new File("Puntuajes.txt");
+        File archivo = new File("Puntajes.txt");
         String linea;
         Scanner lector = new Scanner(archivo);
         
@@ -40,9 +40,10 @@ public class Puntuajes extends javax.swing.JFrame {
         }
        
         } catch (Exception e) {
-            System.out.println(e);
+            
         }
-        ArrayList<String[]> Mejores = new ArrayList<>(); //ArrayList that contaiins scores sort by points-time
+        
+        ArrayList<String[]> Mejores = new ArrayList<>(); //ArrayList that contains scores sort by points-time
         ArrayList<String[]> lineasCopia = new ArrayList<String[]>(lineas); //ArrayList that is a copy of the fist ArrayList of scores to avoid errors 
             while (true) {
             for (int i = 0; i < lineasCopia.size(); i++) {
@@ -58,6 +59,7 @@ public class Puntuajes extends javax.swing.JFrame {
             }
             }
             LlenarTablas(Mejores, lineas);
+            
     }
 
     /*Fill the boths tables, one sort by date of game and the other one with the best*/
@@ -65,14 +67,15 @@ public class Puntuajes extends javax.swing.JFrame {
                for (int i = 0; i < tabla1.size(); i++) { //A cicle to read the scores in the arrayList
                 String[] data = tabla1.get(i);
                 data[2] = convertTime(data[2]);
-            DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel(); //Gets the model of the table
+            DefaultTableModel modelo = (DefaultTableModel)RecordsTable.getModel(); //Gets the model of the table
             modelo.addRow(data);  //Add the score to a row
             }
             for (int i = 0; i < tabla2.size(); i++) { //The same as the other one but with the second table
                 String[] data = tabla2.get(i);
-            DefaultTableModel modelo2 = (DefaultTableModel)jTable1.getModel();
+            DefaultTableModel modelo2 = (DefaultTableModel)HistoryTable.getModel();
             modelo2.addRow(data); 
             }
+            
     }
 
     /*Commpares a score with the other ones and retunr a boolean value*/
@@ -127,23 +130,24 @@ public class Puntuajes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBest = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        Records = new javax.swing.JPanel();
+        LblRecords = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTodo = new javax.swing.JPanel();
+        RecordsTable = new javax.swing.JTable();
+        History = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        HistoryTable = new javax.swing.JTable();
+        LblHistory = new javax.swing.JLabel();
+        BtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tops e Historial de Snake");
         getContentPane().setLayout(null);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Mejores Tiempos");
+        LblRecords.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblRecords.setText("Mejores Tiempos");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        RecordsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -155,7 +159,7 @@ public class Puntuajes extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -166,39 +170,40 @@ public class Puntuajes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setHeaderValue("Nombre");
-            jTable2.getColumnModel().getColumn(1).setHeaderValue("Puntuacion");
-            jTable2.getColumnModel().getColumn(2).setHeaderValue("Tiempo");
-            jTable2.getColumnModel().getColumn(3).setHeaderValue("Fecha");
+        RecordsTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(RecordsTable);
+        if (RecordsTable.getColumnModel().getColumnCount() > 0) {
+            RecordsTable.getColumnModel().getColumn(0).setResizable(false);
+            RecordsTable.getColumnModel().getColumn(1).setResizable(false);
+            RecordsTable.getColumnModel().getColumn(2).setResizable(false);
+            RecordsTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        javax.swing.GroupLayout jBestLayout = new javax.swing.GroupLayout(jBest);
-        jBest.setLayout(jBestLayout);
-        jBestLayout.setHorizontalGroup(
-            jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBestLayout.createSequentialGroup()
+        javax.swing.GroupLayout RecordsLayout = new javax.swing.GroupLayout(Records);
+        Records.setLayout(RecordsLayout);
+        RecordsLayout.setHorizontalGroup(
+            RecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RecordsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(RecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                    .addComponent(LblRecords, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jBestLayout.setVerticalGroup(
-            jBestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBestLayout.createSequentialGroup()
+        RecordsLayout.setVerticalGroup(
+            RecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RecordsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jBest);
-        jBest.setBounds(496, 10, 320, 360);
+        getContentPane().add(Records);
+        Records.setBounds(496, 10, 320, 360);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        HistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -210,7 +215,7 @@ public class Puntuajes extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -222,59 +227,60 @@ public class Puntuajes extends javax.swing.JFrame {
             }
         });
         setData();
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Nombre");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Puntuacion");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Tiempo");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Fecha");
+        HistoryTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(HistoryTable);
+        if (HistoryTable.getColumnModel().getColumnCount() > 0) {
+            HistoryTable.getColumnModel().getColumn(0).setResizable(false);
+            HistoryTable.getColumnModel().getColumn(1).setResizable(false);
+            HistoryTable.getColumnModel().getColumn(2).setResizable(false);
+            HistoryTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Todo");
+        LblHistory.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblHistory.setText("Todo");
 
-        javax.swing.GroupLayout jTodoLayout = new javax.swing.GroupLayout(jTodo);
-        jTodo.setLayout(jTodoLayout);
-        jTodoLayout.setHorizontalGroup(
-            jTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTodoLayout.createSequentialGroup()
+        javax.swing.GroupLayout HistoryLayout = new javax.swing.GroupLayout(History);
+        History.setLayout(HistoryLayout);
+        HistoryLayout.setHorizontalGroup(
+            HistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HistoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(HistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LblHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
-        jTodoLayout.setVerticalGroup(
-            jTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jTodoLayout.createSequentialGroup()
+        HistoryLayout.setVerticalGroup(
+            HistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HistoryLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jTodo);
-        jTodo.setBounds(6, 0, 490, 300);
+        getContentPane().add(History);
+        History.setBounds(6, 0, 490, 300);
 
-        jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnExit.setText("Volver");
+        BtnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(50, 320, 105, 49);
+        getContentPane().add(BtnExit);
+        BtnExit.setBounds(50, 320, 105, 49);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExitActionPerformed
         Menu volver = new Menu();
         volver.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,33 +299,34 @@ public class Puntuajes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Puntuajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Puntajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Puntuajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Puntajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Puntuajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Puntajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Puntuajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Puntajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Puntuajes().setVisible(true);
+                new Puntajes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jBest;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton BtnExit;
+    private javax.swing.JPanel History;
+    private javax.swing.JTable HistoryTable;
+    private javax.swing.JLabel LblHistory;
+    private javax.swing.JLabel LblRecords;
+    private javax.swing.JPanel Records;
+    private javax.swing.JTable RecordsTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JPanel jTodo;
     // End of variables declaration//GEN-END:variables
 }

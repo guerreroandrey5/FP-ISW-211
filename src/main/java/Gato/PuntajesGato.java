@@ -8,8 +8,7 @@ package Gato;
 import java.awt.Color;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 /**
  *
@@ -127,6 +126,7 @@ public class PuntajesGato extends javax.swing.JFrame {
         HistoryTable.setSelectionBackground(new java.awt.Color(63, 63, 63));
         HistoryTable.setSelectionForeground(new java.awt.Color(63, 63, 63));
         HistoryTable.setShowGrid(true);
+        HistoryTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(HistoryTable);
 
         LblHP.setForeground(new java.awt.Color(204, 204, 204));
@@ -148,6 +148,7 @@ public class PuntajesGato extends javax.swing.JFrame {
         RecordsTable.setSelectionBackground(new java.awt.Color(63, 63, 63));
         RecordsTable.setSelectionForeground(new java.awt.Color(63, 63, 63));
         RecordsTable.setShowGrid(true);
+        RecordsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(RecordsTable);
 
         LblRc.setForeground(new java.awt.Color(204, 204, 204));
@@ -169,14 +170,13 @@ public class PuntajesGato extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LblHP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LblRc)
-                        .addGap(555, 555, 555))
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblHP)
+                            .addComponent(LblRc))
+                        .addGap(492, 492, 492)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnMenu)
                 .addContainerGap())
