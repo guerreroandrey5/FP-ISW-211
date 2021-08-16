@@ -105,6 +105,8 @@ public class AGame extends javax.swing.JFrame {
         indice = 0;
         trysP = 0;
         trysN = 0;
+        Points = 0;
+        nPoints = 0;
         
     }
     
@@ -189,7 +191,7 @@ public class AGame extends javax.swing.JFrame {
         cantl = LblSecretWord.length;
         for (int i = 0; i < LblSecretWord.length; i++) {
             LblSecretWord[i] = new JLabel();
-            LblSecretWord[i].setBounds(new Rectangle(15, (i+1)*40, 60, 25)); 
+            LblSecretWord[i].setBounds(new Rectangle(15, (i + 1)* 40, 60, 25)); 
             if (i == 0) {
                 LblSecretWord[i].setLocation(130,380);
             } else {
@@ -277,7 +279,7 @@ public void guardarDatos() {//Save the Records History of every Game
         try {
             File archivo = new File("HistorialHanged.txt");
             FileWriter writez = new FileWriter(archivo, true);
-            writez.write(nJ + ", logró obtener " + Points + " Puntos, pero perdió " + nPoints + fecha.toLocaleString() + "\n");           
+            writez.write(nJ + ", logró obtener " + Points + " Puntos, pero perdió " + nPoints + ", " + fecha.toLocaleString() + "\n");           
             writez.close();
         } catch (Exception e) {
         }

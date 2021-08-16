@@ -21,8 +21,8 @@ public class Puntajes extends javax.swing.JFrame {
      */
     public Puntajes() {
         initComponents();
-         setLocationRelativeTo(null);
-         setSize(830,420);
+         //setLocationRelativeTo(null);
+         //setSize(830,420);
          
     }
 
@@ -142,6 +142,8 @@ public class Puntajes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tops e Historial de Snake");
+        setPreferredSize(new java.awt.Dimension(830, 420));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         LblRecords.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
