@@ -22,7 +22,7 @@ public class MenuGato extends javax.swing.JFrame {
     }
     /*Loads an image for the menu and icon for the application*/
 private void Imgs(){
-        LblImg.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/TitleScrn.png"),LblImg));
+        LblImg.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/TitleScrnDark.png"),LblImg));
         
         ImageIcon icono = new ImageIcon(".\\src\\main\\java\\Recursos/icono.png");
         this.setIconImage(icono.getImage());
@@ -36,9 +36,9 @@ private void Imgs(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        PlnMenu = new javax.swing.JPanel();
+        LblM = new javax.swing.JLabel();
+        LblName = new javax.swing.JLabel();
         BtnPoints = new javax.swing.JButton();
         BtnJugar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
@@ -49,14 +49,14 @@ private void Imgs(){
         setName("MGato"); // NOI18N
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(63, 63, 63));
+        PlnMenu.setBackground(new java.awt.Color(63, 63, 63));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Guapx el que lo lea");
+        LblM.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        LblM.setForeground(new java.awt.Color(204, 204, 204));
+        LblM.setText("Guapx el que lo lea");
 
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("TicTacToe The Game :D");
+        LblName.setForeground(new java.awt.Color(204, 204, 204));
+        LblName.setText("TicTacToe The Game :D");
 
         BtnPoints.setBackground(new java.awt.Color(63, 63, 63));
         BtnPoints.setForeground(new java.awt.Color(204, 204, 204));
@@ -85,32 +85,36 @@ private void Imgs(){
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        LblImg.setBackground(new java.awt.Color(63, 63, 63));
+
+        javax.swing.GroupLayout PlnMenuLayout = new javax.swing.GroupLayout(PlnMenu);
+        PlnMenu.setLayout(PlnMenuLayout);
+        PlnMenuLayout.setHorizontalGroup(
+            PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlnMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(118, 118, 118))
+                .addGroup(PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PlnMenuLayout.createSequentialGroup()
+                        .addGroup(PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PlnMenuLayout.createSequentialGroup()
+                                .addComponent(LblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PlnMenuLayout.createSequentialGroup()
+                                .addComponent(LblM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LblName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlnMenuLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(118, 118, 118))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        PlnMenuLayout.setVerticalGroup(
+            PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlnMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -120,9 +124,9 @@ private void Imgs(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnSalir)
                 .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                .addGroup(PlnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblName)
+                    .addComponent(LblM))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,11 +134,11 @@ private void Imgs(){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PlnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PlnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -159,7 +163,6 @@ private void Imgs(){
     }//GEN-LAST:event_BtnPointsActionPerformed
 
     private void BtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJugarActionPerformed
-
         Gato TicTacGame = new Gato();
         dispose();
         TicTacGame.setVisible(true);
@@ -205,8 +208,8 @@ private void Imgs(){
     private javax.swing.JButton BtnPoints;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JLabel LblImg;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel LblM;
+    private javax.swing.JLabel LblName;
+    private javax.swing.JPanel PlnMenu;
     // End of variables declaration//GEN-END:variables
 }
