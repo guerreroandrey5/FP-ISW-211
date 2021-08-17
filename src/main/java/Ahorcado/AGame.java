@@ -46,6 +46,7 @@ public class AGame extends javax.swing.JFrame {
     int nPoints = 0;
     private Date fecha = new Date();
     int cantl = 0;
+    String SWord = "";
     /**
      * Creates new form AJuego
      */
@@ -178,7 +179,7 @@ public class AGame extends javax.swing.JFrame {
         int n = r.nextInt(words.size());
         if(cantidadW.size() != words.size() && cantidadW.size() != 0) {
            while (cantidadW.contains(n)) {
-            n = r.nextInt(words.size());
+            n = r.nextInt(words.size());           
         }
         }else if (cantidadW.size() == 0) {
             cantidadW.add(n);
@@ -186,7 +187,8 @@ public class AGame extends javax.swing.JFrame {
             cantidadW = new ArrayList<>();
         }
         cantidadW.add(n);
-        indP = n;      
+        indP = n; 
+        SWord = (words.get(n));
         LblSecretWord = new JLabel[words.get(n).length()];
         cantl = LblSecretWord.length;
         for (int i = 0; i < LblSecretWord.length; i++) {
@@ -243,6 +245,8 @@ public class AGame extends javax.swing.JFrame {
             PanelTeclado.setVisible(false);
             LabelVisor2.setIcon(Ajustar.Resize(new ImageIcon(".\\src\\main\\java\\Recursos/Fallaste.jpg"), LabelVisor2));
             LblHints.setText("Ay no, pero que has hecho?");
+            LblAlert.setVisible(true);
+            LblAlert.setText("la respuesta correcta era: " + SWord);
         }
     }
     
